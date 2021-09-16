@@ -64,6 +64,11 @@ app.get('/',(req,res)=>{
 
 /*Aqui se Envia la latitud y longitud cuando el usuario llegue a "webserver/prueba" */
 app.get("/prueba", (req,res) => {
+    res.set({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+    });
+    
    res.json({
        latitud: latitud, //Enviando datos que recojimos en el servidor UDP
        longitud: longitud,
