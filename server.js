@@ -26,7 +26,7 @@ conexion.connect(
            
             throw error
         };
-        console.log('Conexion Exitosa');
+        console.log('Conexion Exitosa-------');
     }
 )
 
@@ -65,7 +65,7 @@ udpServer.on('message',(msg,rinfo)=>{
 
     var datos  = "INSERT INTO UbicacionTaxi (Latitud,Longitud,Fecha,Hora) VALUES?",latitud,longitud,fecha,hora;
 
-    connection.query(datos, (error, rows) => {
+    conexion.query(datos, (error, rows) => {
         if(error)  throw error
         console.log("Datos enviados");
     });
