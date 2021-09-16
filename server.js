@@ -40,18 +40,6 @@ udpServer.on('message',(msg,rinfo)=>{
 
     contador = contador +1
 
-    
-    /*Aqui se Envia la latitud y longitud cuando el usuario llegue a "webserver/prueba" */
-    app.get("/prueba", (req,res) => {
-        res.json({
-            latitud: latitud, //Enviando datos que recojimos en el servidor UDP
-            longitud: longitud,
-            fecha:fecha,
-            hora:hora,
-            contador: contador
-        });
-    })
-
 });
 
 
@@ -72,6 +60,17 @@ app.set('views',__dirname+'/Views');
 
 app.get('/',(req,res)=>{
     res.render('index');
+})
+
+/*Aqui se Envia la latitud y longitud cuando el usuario llegue a "webserver/prueba" */
+app.get("/prueba", (req,res) => {
+   res.json({
+       latitud: latitud, //Enviando datos que recojimos en el servidor UDP
+       longitud: longitud,
+       fecha:fecha,
+       hora:hora,
+       contador: contador,
+   });
 })
 
 

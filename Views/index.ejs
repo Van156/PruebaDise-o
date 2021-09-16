@@ -49,18 +49,19 @@ crossorigin="">
         .then(response =>  response.json )
         .then(data => {
           console.log(data);
-          // showLocation.innerHTML = await (`Latitud: ${data.latitud}, 
-          //                         Longitud: ${data.longitud},
-          //                         Fecha: ${data.fecha},
-          //                         Hora: ${data.hora},
-          //                         Numero: ${data.contador}`);
+          latitud=parseFloat(data.latitud);
+          longitud=parseFloat(data.longitud);
+          
+          showLocation.innerHTML =  `Latitud: ${data.latitud}, 
+                                  Longitud: ${data.longitud},
+                                  Fecha: ${data.fecha},
+                                  Hora: ${data.hora},
+                                  Numero: ${data.contador}`;
         })
         .catch(err=>   console.log(err))
 
+
         
-      
-        latitud=parseFloat(data.latitud);
-        longitud=parseFloat(data.longitud);
 
        myMap.setView([latitud, longitud]);
 
