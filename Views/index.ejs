@@ -31,19 +31,16 @@ crossorigin="">
 </script>
 
 <script type="text/javascript">   
-    
-    var url="http://"+"3.19.69.28"+":8080/prueba";
-    console.log(url)
+        
     var latitud=0;
     var longitud=0;
     const showLocation = document.getElementById("gps");
-
 
     let myMap = L.map('myMap') // latitude, longitude y zoom
 
     async function getGPS() {
 
-        const response = await fetch(url, {
+        const response = await fetch("http://3.19.69.28:8080/prueba", {
             mode: 'no-cors'
         });
 
