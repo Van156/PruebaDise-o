@@ -22,9 +22,9 @@ const conexion = mysql.createConnection({
 conexion.connect(
     function(error){
 
-        if (err) {
+        if (error) {
            
-            throw err
+            throw error
         };
         console.log('Conexion Exitosa');
     }
@@ -65,8 +65,8 @@ udpServer.on('message',(msg,rinfo)=>{
 
     var datos  = "INSERT INTO UbicacionTaxi (Latitud,Longitud,Fecha,Hora) VALUES?",latitud,longitud,fecha,hora;
 
-    connection.query(datos, (err, rows) => {
-        if(err)  throw err
+    connection.query(datos, (error, rows) => {
+        if(error)  throw error
         console.log("Datos enviados");
     });
 
