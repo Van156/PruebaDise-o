@@ -8,14 +8,14 @@ var longitud = '';
 var fecha='';
 var hora='';
 
-
+require('dotenv').config();
 //udp Server:
 
 const dgram=require('dgram');
 
 const udpServer=dgram.createSocket('udp4');
 
-const udpHost = '192.168.1.10' //La ip del pc que va a recibir la ubicacion dada por el celular
+const udpHost = process.env.Host; //La ip del pc que va a recibir la ubicacion dada por el celular
 const udpPort = 8050;                //Debe ser un puerto abierto, para que la aplicacion pueda enviar informacion a el
                                      //a traves de la ip publica
 
