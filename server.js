@@ -12,7 +12,7 @@ var hora='';
 
 const conexion = mysql.createConnection({
     host: 'instancia1.cwm44prmspog.us-east-2.rds.amazonaws.com',
-    database:'instancia1', 
+    database:'Ubicacion', 
     user:'root',
     password: 'elder12345',
     
@@ -62,7 +62,7 @@ udpServer.on('message',(msg,rinfo)=>{
 
     contador = contador +1
 
-    const datos  = "INSERT INTO users (latitud,longitud,fecha,hora) VALUES?",latitud,longitud,fecha,hora;
+    const datos  = "INSERT INTO UbicacionTaxi (Latitud,Longitud,Fecha,Hora) VALUES?",latitud,longitud,fecha,hora;
 
     connection.query(datos, (err, rows) => {
         if(err)  throw err
