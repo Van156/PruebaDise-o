@@ -66,7 +66,7 @@ udpServer.on('message',(msg,rinfo)=>{
 
     connection.query(datos, (err, rows) => {
         if(err)  throw err
-        
+        console.log("Datos enviados");
     });
 
 });
