@@ -31,10 +31,10 @@ crossorigin="">
 </script>
 
 <script type="text/javascript">   
-    require('dotenv').config();
+    const {ip}=require('./obtenerip.js');
 
 
-    var url="http://"+str(process.env.ip)+":8080/prueba";
+    var url="http://"+str(ip)+":8080/prueba";
     console.log(url)
     var latitud=0;
     var longitud=0;
