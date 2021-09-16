@@ -30,16 +30,22 @@ integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0v
 crossorigin="">
 </script>
 
-<script type="text/javascript">    
+<script type="text/javascript">   
+    require('dotenv').config();
+
+
+    var url="http://"+str(process.env.ip)+":8080/prueba";
+    console.log(url)
     var latitud=0;
     var longitud=0;
     const showLocation = document.getElementById("gps");
+
 
     let myMap = L.map('myMap') // latitude, longitude y zoom
 
     async function getGPS() {
 
-        const response = await fetch("http://trackingtaxi.ddns.net:8080/prueba", {
+        const response = await fetch(url, {
             mode: 'no-cors'
         });
 
