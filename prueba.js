@@ -19,3 +19,8 @@ conexion.connect(
         console.log('Conexion Exitosa');
     }
 )
+
+conexion.query("SELECT *from UbicacionTaxi",(error,rows)=> {
+    if (error) throw error
+    console.log(rows)
+})
