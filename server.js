@@ -8,6 +8,7 @@ var longitud = '';
 var fecha='';
 var hora='';
 
+const mysql=require('mysql');
 //Base de datos conexion 
 
 const conexion = mysql.createConnection({
@@ -34,7 +35,7 @@ require('dotenv').config();
 //udp Server:
 
 const dgram=require('dgram');
-const mysql=require('mysql');
+
 const udpServer=dgram.createSocket('udp4');
 
 const udpHost = process.env.Host; //La ip del pc que va a recibir la ubicacion dada por el celular
@@ -62,7 +63,7 @@ udpServer.on('message',(msg,rinfo)=>{
 
     contador = contador +1
 
-    const datos  = "INSERT INTO UbicacionTaxi (Latitud,Longitud,Fecha,Hora) VALUES?",latitud,longitud,fecha,hora;
+    var datos  = "INSERT INTO UbicacionTaxi (Latitud,Longitud,Fecha,Hora) VALUES?",latitud,longitud,fecha,hora;
 
     connection.query(datos, (err, rows) => {
         if(err)  throw err
