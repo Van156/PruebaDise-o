@@ -12,26 +12,23 @@ const mysql=require('mysql');
 //Base de datos conexion 
 
 const conexion = mysql.createConnection({
-    host: 'instancia1.cwm44prmspog.us-east-2.rds.amazonaws.com',
-    database:'Ubicacion', 
-    user:'root',
-    password: 'elder12345',
-    
+    host: 'dis-electronico.cncrhprhsi7e.us-east-2.rds.amazonaws.coms',
+    database:'location', 
+    user:'admin',
+    password: 'Bb1006614832*',
 });
 
 conexion.connect(
     function(error){
-
         if (error) {
-           
             throw error
         };
         console.log('Conexion Exitosa-------');
     }
 )
 
-
 require('dotenv').config();
+
 //udp Server:
 
 const dgram=require('dgram');
@@ -63,7 +60,7 @@ udpServer.on('message',(msg,rinfo)=>{
 
     contador = contador +1
 
-    var datos  = "INSERT INTO UbicacionTaxi2 (id,Latitud,Longitud,Fecha,Hora) "+"VALUES('"+contador+"','"+latitud+"','"+longitud+"','"+fecha+"','"+hora+"')";
+    var datos  = "INSERT INTO taxi_location (id,latitud,longitud,fecha,hora) "+"VALUES('"+contador+"','"+latitud+"','"+longitud+"','"+fecha+"','"+hora+"')";
     //var ubicacion=[[latitud,longitud,fecha,hora]];
     conexion.query(datos,(error, rows) => {
         if(error)  throw error
