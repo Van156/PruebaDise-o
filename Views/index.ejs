@@ -31,7 +31,7 @@ crossorigin="">
 </script>
 
 <script type="text/javascript">   
-  
+        
     var latitud=0;
     var longitud=0;
     const showLocation = document.getElementById("gps");
@@ -40,20 +40,27 @@ crossorigin="">
 
     async function getGPS() {
 
-        const response = await fetch("http://3.19.69.28:8080/prueba", {
-            mode: 'no-cors'
-        });
+        // const response = await fetch("http://3.19.69.28:8080/prueba", {
+        //     mode: 'no-cors'
+        // });
 
-        let responseJson = await response.json();
+        // let responseJson = await response.json();
+        fetch("http://3.19.69.28:8080/prueba")
+        .then(response =>  response.json )
+        .then(data => {
+          console.log(data);
+          // showLocation.innerHTML = await (`Latitud: ${data.latitud}, 
+          //                         Longitud: ${data.longitud},
+          //                         Fecha: ${data.fecha},
+          //                         Hora: ${data.hora},
+          //                         Numero: ${data.contador}`);
+        })
+        .catch(err=>   console.log(err))
 
-        showLocation.innerHTML = await (`Latitud: ${responseJson.latitud}, 
-                                  Longitud: ${responseJson.longitud},
-                                  Fecha: ${responseJson.fecha},
-                                  Hora: ${responseJson.hora},
-                                  Numero: ${responseJson.contador}`);
+        
       
-        latitud=parseFloat(responseJson.latitud);
-        longitud=parseFloat(responseJson.longitud);
+        latitud=parseFloat(data.latitud);
+        longitud=parseFloat(data.longitud);
 
        myMap.setView([latitud, longitud]);
 
