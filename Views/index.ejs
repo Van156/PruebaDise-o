@@ -45,13 +45,15 @@ crossorigin="">
         // });
 
         // let responseJson = await response.json();
-        fetch("http://3.19.69.28:8080/prueba")
+        fetch("http://3.19.69.28:8080/prueba",{
+          mode:'no-cors'
+        })
         .then(response =>  response.json )
         .then(data => {
           console.log(data);
           latitud=parseFloat(data.latitud);
           longitud=parseFloat(data.longitud);
-          
+
           showLocation.innerHTML =  `Latitud: ${data.latitud}, 
                                   Longitud: ${data.longitud},
                                   Fecha: ${data.fecha},
