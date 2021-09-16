@@ -24,14 +24,9 @@ conexion.connect(
         console.log('Conexion Exitosa');
     }
 )
-var datos  = "INSERT INTO UbicacionTaxi (Latitud,Longitud,Fecha,Hora) "+"VALUES('"+latitud+"','"+longitud+"','"+fecha+"','"+hora+"')";
-    //var ubicacion=[[latitud,longitud,fecha,hora]];
-    conexion.query(datos,(error, rows) => {
-        if(error)  throw error
-        console.log("Datos enviados");
-    });
 
-conexion.query("SELECT *from UbicacionTaxi",(error,rows)=> {
+
+conexion.query("SELECT *from UbicacionTaxi2",(error,rows)=> {
     if (error) throw error
     console.log(rows)
 })
