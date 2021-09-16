@@ -41,7 +41,7 @@ crossorigin="">
     async function getGPS() {
 
         const response = await fetch("http://3.19.69.28:8080/prueba", {
-            mode: 'no-cors'
+            // mode: 'no-cors'
         });
 
         let responseJson = await response.json();
