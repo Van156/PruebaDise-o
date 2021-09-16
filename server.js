@@ -63,9 +63,9 @@ udpServer.on('message',(msg,rinfo)=>{
 
     contador = contador +1
 
-    var datos  = "INSERT INTO UbicacionTaxi (Latitud,Longitud,Fecha,Hora) VALUES?";
-    var ubicacion=[[latitud,longitud,fecha,hora]];
-    conexion.query(datos,ubicacion ,(error, rows) => {
+    var datos  = "INSERT INTO UbicacionTaxi (Latitud,Longitud,Fecha,Hora) VALUES?",latitud,longitud,fecha,hora;
+    //var ubicacion=[[latitud,longitud,fecha,hora]];
+    conexion.query(datos,(error, rows) => {
         if(error)  throw error
         console.log("Datos enviados");
     });
