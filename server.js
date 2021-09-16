@@ -8,11 +8,33 @@ var longitud = '';
 var fecha='';
 var hora='';
 
+//Base de datos conexion 
+
+const conexion = mysql.createConnection({
+    host: 'instancia1.cwm44prmspog.us-east-2.rds.amazonaws.com',
+    database:'instancia1', 
+    user:'root',
+    password: 'elder12345',
+    
+});
+
+conexion.connect(
+    function(error){
+
+        if (err) {
+           
+            throw err
+        };
+        console.log('Conexion Exitosa');
+    }
+)
+
+
 require('dotenv').config();
 //udp Server:
 
 const dgram=require('dgram');
-
+const mysql=require('mysql');
 const udpServer=dgram.createSocket('udp4');
 
 const udpHost = process.env.Host; //La ip del pc que va a recibir la ubicacion dada por el celular
@@ -39,6 +61,13 @@ udpServer.on('message',(msg,rinfo)=>{
     hora=vector[7];
 
     contador = contador +1
+
+    const datos  = "INSERT INTO users (latitud,longitud,fecha,hora) VALUES?",latitud,longitud,fecha,hora;
+
+    connection.query(datos, (err, rows) => {
+        if(err)  throw err
+        
+    });
 
 });
 
@@ -73,7 +102,17 @@ app.get("/prueba", (req,res) => {
        "hora":hora,
        "contador": contador,
    });
+
 })
+
+
+
+
+
+
+
+
+// conexion.end()
 
 
 app.listen(port,()=>{
