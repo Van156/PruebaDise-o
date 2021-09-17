@@ -38,10 +38,16 @@ crossorigin="">
 
     let myMap = L.map('myMap') // latitude, longitude y zoom
 
+    L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`, {
+      maxZoom: 18,
+    }).addTo(myMap);
+
+    myMap.setView([latitud, longitud], 14);
+
     async function getGPS() {
 
-        const response = await fetch("http://3.21.28.136:8080/prueba", {
-            // mode: 'no-cors'
+        const response = await fetch("./prueba", {
+            mode: 'no-cors'
         });
 
         let responseJson = await response.json();
@@ -54,17 +60,12 @@ crossorigin="">
       
         latitud=parseFloat(responseJson.latitud);
         longitud=parseFloat(responseJson.longitud);
+        console.log(latitud);
+        console.log(longitud);
 
-       myMap.setView([latitud, longitud]);
-
-    L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`, {
-      maxZoom: 18,
-    }).addTo(myMap);
-
-    //
-    let marker = L.marker([latitud, longitud]).addTo(myMap)
-
-
+        myMap.panTo([latitud, longitud]);
+   
+        let marker = L.marker([latitud, longitud]).addTo(myMap);
     };
 
     document.addEventListener("load", getGPS());
