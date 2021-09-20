@@ -8,14 +8,18 @@ var longitud = '';
 var fecha='';
 var hora='';
 
+//Usar variables de entorno de archivo .env para info privada
+
+require("dotenv").config();
+
 const mysql=require('mysql');
 //Base de datos conexion 
 
 const conexion = mysql.createConnection({
-    host: 'instancia1.cwm44prmspog.us-east-2.rds.amazonaws.com',
-    database:'Ubicacion', 
-    user:'root',
-    password: 'elder12345',
+    host: process.env.dbHOST,
+    database:process.env.dbNAME, 
+    user:process.env.dbUSER,
+    password:process.env.dbPASSWORD,
     
 });
 
@@ -38,7 +42,7 @@ const dgram=require('dgram');
 
 const udpServer=dgram.createSocket('udp4');
 
-const udpHost = process.env.Host; //La ip del pc que va a recibir la ubicacion dada por el celular
+const udpHost = 'ec2-18-208-170-163.compute-1.amazonaws.com'; //La ip del pc que va a recibir la ubicacion dada por el celular
 const udpPort = 8050;                //Debe ser un puerto abierto, para que la aplicacion pueda enviar informacion a el
                                      //a traves de la ip publica
 
@@ -63,13 +67,12 @@ udpServer.on('message',(msg,rinfo)=>{
 
     contador = contador +1
 
-    var datos  = "INSERT INTO UbicacionTaxi2 (id,Latitud,Longitud,Fecha,Hora) "+"VALUES('"+contador+"','"+latitud+"','"+longitud+"','"+fecha+"','"+hora+"')";
+    var datos  = "INSERT INTO new_table (latitud,longitud,fecha,hora) "+"VALUES('"+latitud+"','"+longitud+"','"+fecha+"','"+hora+"')";
     //var ubicacion=[[latitud,longitud,fecha,hora]];
     conexion.query(datos,(error, rows) => {
         if(error)  throw error
         console.log("Datos enviados");
     });
-
 });
 
 
