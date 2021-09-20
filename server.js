@@ -34,8 +34,6 @@ conexion.connect(
     }
 )
 
-
-require('dotenv').config();
 //udp Server:
 
 const dgram=require('dgram');
