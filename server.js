@@ -40,7 +40,7 @@ const dgram=require('dgram');
 
 const udpServer=dgram.createSocket('udp4');
 
-const udpHost = 'ec2-18-208-170-163.compute-1.amazonaws.com'; //La ip del pc que va a recibir la ubicacion dada por el celular
+const udpHost = process.env.UDPHOST; //La ip del pc que va a recibir la ubicacion dada por el celular
 const udpPort = 8050;                //Debe ser un puerto abierto, para que la aplicacion pueda enviar informacion a el
                                      //a traves de la ip publica
 
@@ -65,7 +65,7 @@ udpServer.on('message',(msg,rinfo)=>{
 
     contador = contador +1
 
-    var datos  = "INSERT INTO new_table (latitud,longitud,fecha,hora) "+"VALUES('"+latitud+"','"+longitud+"','"+fecha+"','"+hora+"')";
+    var datos  = "INSERT INTO taxi_location (latitud,longitud,fecha,hora) "+"VALUES('"+latitud+"','"+longitud+"','"+fecha+"','"+hora+"')";
     //var ubicacion=[[latitud,longitud,fecha,hora]];
     conexion.query(datos,(error, rows) => {
         if(error)  throw error
