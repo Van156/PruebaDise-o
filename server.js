@@ -83,6 +83,7 @@ const port = 8080;
 const express=require('express');
 const ejs=require('ejs');
 const app=express();
+const sys = require("child_process");
 
 // Motor de plantillas para el fronted
 app.set('view engine','ejs');
@@ -108,12 +109,16 @@ app.get("/prueba", (req,res) => {
 })
 
 app.post("/Pull",(req,res)=>{
+    sys.exec("cd /home/ubuntu/diseño && git reset --hard && git pull origin Elder");
     console.log("Se realizo un Pull")
 
 })
+
+
 // conexion.end()
 
 //F en
+
 
 app.listen(port,()=>{
     console.log('Servidor Web en el puerto ', port)
