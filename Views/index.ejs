@@ -68,11 +68,15 @@ crossorigin="">
         let markerFinal = L.marker([latitud, longitud]).addTo(myMap);
         contador=2;
        }
+
        if (latitud!=0){
        latlngs.push([latitud, longitud]);
 
-       polyline.setLatLngs(latlngs, {color: '#4353ff'});
-       markerFinal.setLatLng(latlngs); 
+       polyline.setLatLngs(latlngs, {color: '#4353ff'}); //Añaduir esta coordenada a la polilinea
+
+       let latlng = new L.LatLng(latitud, longitud); //Crea un objeto 
+       markerFinal.setLatLng(latlng); 
+
       }
 
 
