@@ -61,14 +61,14 @@ crossorigin="">
         latitud=parseFloat(responseJson.latitud);
         longitud=parseFloat(responseJson.longitud);
 
-       myMap.panTo([latitud, longitud]);
+       //myMap.panTo([latitud, longitud]);
         
        if (latitud!=0 && contador==0){
         var markerInicial = L.marker([latitud, longitud]).addTo(myMap);
         var markerFinal = L.marker([latitud, longitud]).addTo(myMap);
         contador=2;
        }
-
+	
        if (latitud!=0){
        latlngs.push([latitud, longitud]);
 
