@@ -36,6 +36,8 @@ crossorigin="">
 
 
     let myMap = L.map('myMap') // latitude, longitude y zoom
+
+    let markerInicial = L.marker([latitud, longitud]).addTo(myMap);
       
      L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`, {
       maxZoom: 18,}).addTo(myMap);
@@ -61,6 +63,7 @@ crossorigin="">
         latitud=parseFloat(responseJson.latitud);
         longitud=parseFloat(responseJson.longitud);
 
+<<<<<<< HEAD
        //myMap.panTo([latitud, longitud]);
         
        if (latitud!=0 && contador==0){
@@ -69,20 +72,17 @@ crossorigin="">
         contador=2;
        }
 	
+=======
+       myMap.panTo([latitud, longitud]);
+
+>>>>>>> f137ce660fecc2947c95e40b3ed0942130f10512
        if (latitud!=0){
        latlngs.push([latitud, longitud]);
 
        polyline.setLatLngs(latlngs, {color: '#4353ff'}); //Añaduir esta coordenada a la polilinea
-
-       var latlng =L.latLng(latitud, longitud); //Crea un objeto 
-       markerFinal.setLatLng(latlng); 
-
       }
 
-
-	
-	
-
+      markerInicial.setLatLng([latitud, longitud]);
 
     };
 
@@ -90,11 +90,7 @@ crossorigin="">
 
     setInterval(getGPS,5000);
 
-   
-
   </script>
-
-
 
 </body>
 
