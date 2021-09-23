@@ -117,7 +117,7 @@ app.post("/Pull",(req,res)=>{
 
 // conexion.end()
 
-//F en
+//F en el chat 
 
 
 app.listen(port,()=>{
