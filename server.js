@@ -107,6 +107,10 @@ app.get("/prueba", (req,res) => {
 
 })
 
+app.post("/Pull",(req,res)=>{
+    console.log("Se realizo un Pull")
+
+})
 // conexion.end()
 
 app.listen(port,()=>{
