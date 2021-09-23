@@ -32,7 +32,7 @@ crossorigin="">
     var longitud=0;
     var contador=0;
     const showLocation = document.getElementById("gps");
-    let latlngs = [];
+    var latlngs = [];
 
 
     let myMap = L.map('myMap') // latitude, longitude y zoom
@@ -64,8 +64,8 @@ crossorigin="">
        myMap.panTo([latitud, longitud]);
         
        if (latitud!=0 && contador==0){
-        let markerInicial = L.marker([latitud, longitud]).addTo(myMap);
-        let markerFinal = L.marker([latitud, longitud]).addTo(myMap);
+        var markerInicial = L.marker([latitud, longitud]).addTo(myMap);
+        var markerFinal = L.marker([latitud, longitud]).addTo(myMap);
         contador=2;
        }
 
