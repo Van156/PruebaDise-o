@@ -30,6 +30,7 @@ crossorigin="">
   
     var latitud=0;
     var longitud=0;
+    var contador=0;
     const showLocation = document.getElementById("gps");
     let latlngs = [];
 
@@ -61,14 +62,22 @@ crossorigin="">
         longitud=parseFloat(responseJson.longitud);
 
        myMap.panTo([latitud, longitud]);
-
+        
+       if (latitud!=0 && contador==0){
+        let markerInicial = L.marker([latitud, longitud]).addTo(myMap);
+        let markerFinal = L.marker([latitud, longitud]).addTo(myMap);
+        contador=2;
+       }
+       if (latitud!=0){
        latlngs.push([latitud, longitud]);
 
        polyline.setLatLngs(latlngs, {color: '#4353ff'});
+       markerFinal.setLatLng(latlngs); 
+      }
 
 
 	
-	let marker = L.marker([latitud, longitud]).addTo(myMap);
+	
 
 
     };
