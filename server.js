@@ -107,15 +107,7 @@ app.get("/prueba", (req,res) => {
 
 })
 
-
-
-
-
-
-
-
 // conexion.end()
-
 
 app.listen(port,()=>{
     console.log('Servidor Web en el puerto ', port)
