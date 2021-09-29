@@ -115,9 +115,7 @@ app.post("/Pull",(req,res)=>{
 })
 
 app.post("/Post",(req,res)=>{
-    fecha=req.body.fecha;
-    hora=req.body.hora;
-    console.log("fecha : "+fecha+" hora : "+hora);
+    console.log(req);
 })
 
 

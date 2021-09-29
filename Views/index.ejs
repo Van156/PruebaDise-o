@@ -44,17 +44,20 @@ const $form= document.querySelector("#form");
 $form.addEventListener("submit", (event)=>{
   event.preventDefault();
 
-  
+
   const formData= new FormData($form);
   fecha_=formData.get('fecha');
   hora_=formData.get('hora');
-  fetch('./Post',{
+  const time ={fecha_,hora_}
+  fetch('/Post',{
     method:'POST',
-    body:{
-      fecha:fecha_,
-      hora:fecha_,
-      }
+    headers:{
+      'Content-Type':'aplication/json',
+    },
+    body:JSON.stringify(time)
     })
+
+
   });
 
     var latitud=0;
