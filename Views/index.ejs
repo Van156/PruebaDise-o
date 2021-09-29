@@ -51,7 +51,8 @@ $form.addEventListener("submit", (event)=>{
   const time ={fecha_,hora_};
   console.log(JSON.stringify(time));
   console.log(time);
-  fetch('/Post',{
+  
+  await fetch('/Post',{
     method:'POST',
     headers:{
       'Content-Type':'aplication/json',
