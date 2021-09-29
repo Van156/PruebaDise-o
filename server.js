@@ -133,12 +133,14 @@ app.post("/Post",(req,res)=>{
         console.log(datos)
         
     })
+    historico=[];
 
-    var Json=JSON.stringify(datos);
-    res.json({
-            json:Json,
-        }
-    );
+    for ( let k in datos ){
+        historico.push([k.latitud,K.longitud]);
+    }
+
+    res.json({historico:historico});
+    
 
 })
 
