@@ -119,7 +119,7 @@ app.use(express.static('public'));
 
 app.post("/Post",(req,res)=>{
     console.log("Datos recibidos")
-    console.log(req);
+    console.log(req.body);
 })
 
 
