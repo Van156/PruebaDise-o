@@ -37,8 +37,7 @@ crossorigin="">
 </script>
 
 <script type="text/javascript">   
-var fecha_;
-var hora_;
+
 const $form= document.querySelector("#form");
 
 $form.addEventListener("submit", (event)=>{
@@ -46,11 +45,11 @@ $form.addEventListener("submit", (event)=>{
 
 
   const formData= new FormData($form);
-  fecha_=String(formData.get('fecha'));
-  hora_=String(formData.get('hora'));
+  const fecha_=String(formData.get('fecha'));
+  const hora_=String(formData.get('hora'));
   console.log(typeof(formData.get('fecha')));
-  fecha1=document.getElementById('fecha').textContent;
-  hora1=document.getElementById('hora').textContent;
+  const fecha1=document.getElementById('fecha').textContent;
+  const hora1=document.getElementById('hora').textContent;
   const time ={fecha_,hora_,fecha1,hora1};
   fetch('/Post',{
     method:'POST',
