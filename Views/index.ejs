@@ -61,7 +61,9 @@ $form.addEventListener("submit", (event)=>{
     body:JSON.stringify(time),
   };
 
-   fetch('/Post',estructura);
+   fetch('/Post',estructura).then( res=> {
+     console.log(res);
+   });
 
 }) ;
 
