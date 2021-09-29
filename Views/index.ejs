@@ -26,6 +26,7 @@
 
     <button>Enviar</button>
   </form>
+
   <h2>Mapa</h2>
 
   <div id="myMap" style="width: 70%;height: 600px; margin: 1rem auto;"></div> 
@@ -36,21 +37,22 @@ crossorigin="">
 </script>
 
 <script type="text/javascript">   
-    const $form= document.querySelector("#form");
 
-    $form.addEventListener("submit", (event)=>{
-      event.preventDefault();
+const $form= document.querySelector("#form");
 
-      const formData= new formData($form);
-      
-      fetch('./Post',{
-        method:'POST',
-        body:{
-          fecha:formData.get('fecha'),
-          hora:formData.get('hora'),
-        }
-      })
+$form.addEventListener("submit", (event)=>{
+  event.preventDefault();
+
+  const formData= new formData($form);
+  
+  fetch('./Post',{
+    method:'POST',
+    body:{
+      fecha:formData.get('fecha'),
+      hora:formData.get('hora'),
+      }
     })
+  });
 
     var latitud=0;
     var longitud=0;
@@ -87,14 +89,8 @@ crossorigin="">
         latitud=parseFloat(responseJson.latitud);
         longitud=parseFloat(responseJson.longitud);
 
-       //myMap.panTo([latitud, longitud]);
-        
-       if (latitud!=0 && contador==0){
-        var markerInicial = L.marker([latitud, longitud]).addTo(myMap);
-        var markerFinal = L.marker([latitud, longitud]).addTo(myMap);
-        contador=2;
-       }
-	
+       myMap.panTo([latitud, longitud]);
+
        if (latitud!=0){
        latlngs.push([latitud, longitud]);
 
