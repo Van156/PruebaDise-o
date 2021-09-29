@@ -62,7 +62,7 @@ $form.addEventListener("submit", (event)=>{
   };
 
    fetch('/Post',estructura).then( res=> {
-     console.log(res);
+     console.log(res.json());
    });
 
 }) ;
