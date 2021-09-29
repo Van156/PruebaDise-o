@@ -114,6 +114,8 @@ app.post("/Pull",(req,res)=>{
 
 })
 
+app.use(express.json({limit:'1mb'}))
+
 app.post("/Post",(req,res)=>{
     console.log(req.body);
 })
