@@ -45,10 +45,10 @@ $form.addEventListener("submit", (event)=>{
 
 
   const formData= new FormData($form);
-  const fecha_=String(formData.get('fecha'));
-  const hora_=String(formData.get('hora'));
+  var fecha_=String(formData.get('fecha'));
+  var hora_=String(formData.get('hora'));
   console.log(typeof(formData.get('fecha')));
-  const time ={fecha_,hora_};
+  var time =[fecha_,hora_];
   console.log(JSON.stringify(time));
   console.log(time);
 
