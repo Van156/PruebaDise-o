@@ -109,13 +109,13 @@ app.get("/prueba", (req,res) => {
 })
 
 app.post("/Pull",(req,res)=>{
-    sys.exec("cd /home/ubuntu/diseño && git reset --hard && git pull origin Elder");
+    sys.exec("cd /home/ubuntu/diseño && git reset --hard && git pull origin Elder2");
     console.log("Se realizo un Pull");
 
 })
 
 app.post("/Post",(req,res)=>{
-    console.log(req);
+    console.log(req.body);
 })
 
 
