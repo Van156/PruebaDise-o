@@ -14,12 +14,24 @@
 <body>
 
   <h1>Taxi Tracking</h1>
+
+  <section class="type-election">
+    <div>
+      <label for="tipoSelect">¿Qué desea ver?</label>
+      <select id="tipoSelect" name="tipo">
+        <option value="actual">Actual</option>
+        <option value="historico">Histórico</option>
+      </select> 
+    </div>
+  </section>
   
-  <div id="gps"></div>
+  <section class="gps-information">
+    <div id="gps"></div>
 
-  <h2>Mapa</h2>
+    <h2>Mapa</h2>
 
-  <div id="myMap" style="width: 70%;height: 600px; margin: 1rem auto;"></div> 
+    <div id="myMap" style="width: 70%;height: 600px; margin: 1rem auto;"></div> 
+  </section>
 
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
 integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
