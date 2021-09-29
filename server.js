@@ -118,7 +118,7 @@ app.use(express.json({limit:'1mb'}));
 app.use(express.static('public'));
 
 app.post("/Post",(req,res)=>{
-    console.log(req.body.fecha_);
+    console.log(req.body);
 })
 
 

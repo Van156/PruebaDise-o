@@ -50,7 +50,8 @@ $form.addEventListener("submit", (event)=>{
   console.log(typeof(formData.get('fecha')));
   const fecha1=document.getElementById('fecha').textContent;
   const hora1=document.getElementById('hora').textContent;
-  const time ={fecha_,hora_,fecha1,hora1};
+  const time =[fecha_,hora_,fecha1,hora1];
+  console.log(time);
   fetch('/Post',{
     method:'POST',
     headers:{
