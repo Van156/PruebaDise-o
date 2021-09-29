@@ -19,10 +19,10 @@
 
   <form id="form">
     <label >Rango de fecha</label>
-    <input type="text" name="fecha">
+    <input type="text" name="fecha" id="fecha">
 
     <label >Rango de fecha</label>
-    <input type="text" name="hora">
+    <input type="text" name="hora" id="hora">
 
     <button>Enviar</button>
   </form>
@@ -48,7 +48,10 @@ $form.addEventListener("submit", (event)=>{
   const formData= new FormData($form);
   fecha_=String(formData.get('fecha'));
   hora_=String(formData.get('hora'));
-  const time ={fecha_,hora_}
+  console.log(typeof(formData.get('fecha')));
+  fecha1=document.getElementById('fecha').textContent;
+  hora1=document.getElementById('hora').textContent;
+  const time ={fecha_,hora_,fecha1,hora1};
   fetch('/Post',{
     method:'POST',
     headers:{
