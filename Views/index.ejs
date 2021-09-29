@@ -37,19 +37,21 @@ crossorigin="">
 </script>
 
 <script type="text/javascript">   
-
+var fecha_;
+var hora_;
 const $form= document.querySelector("#form");
 
 $form.addEventListener("submit", (event)=>{
   event.preventDefault();
 
   const formData= new formData($form);
-  
+  fecha_=formData.get('fecha');
+  hora_=formData.get('hora');
   fetch('./Post',{
     method:'POST',
     body:{
-      fecha:formData.get('fecha'),
-      hora:formData.get('hora'),
+      fecha:fecha_,
+      hora:fecha_,
       }
     })
   });
