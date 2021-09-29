@@ -110,8 +110,14 @@ app.get("/prueba", (req,res) => {
 
 app.post("/Pull",(req,res)=>{
     sys.exec("cd /home/ubuntu/diseño && git reset --hard && git pull origin Elder");
-    console.log("Se realizo un Pull")
+    console.log("Se realizo un Pull");
 
+})
+
+app.post("/Post",(req,res)=>{
+    fecha=req.body.fecha;
+    hora=req.body.hora;
+    console.log("fecha : "+fecha+" hora : "+hora);
 })
 
 
