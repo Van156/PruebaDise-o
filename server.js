@@ -134,10 +134,10 @@ app.post("/Post",(req,res)=>{
         
     })
 
-    
+    var Json=JSON.stringify(datos);
     res.json(
-        JSON.stringify(datos)
-    )
+        {Json}
+    );
 
 })
 
