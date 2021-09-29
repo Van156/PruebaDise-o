@@ -51,16 +51,14 @@ $form.addEventListener("submit", (event)=>{
   const time ={fecha_,hora_};
   console.log(JSON.stringify(time));
   console.log(time);
-  
-  await fetch('/Post',{
+
+   const res = await fetch('/Post',{
     method:'POST',
     headers:{
       'Content-Type':'aplication/json',
     },
     body:JSON.stringify(time),
     })
-
-
   });
 
     var latitud=0;
