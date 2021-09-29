@@ -135,8 +135,9 @@ app.post("/Post",(req,res)=>{
     })
 
     var Json=JSON.stringify(datos);
-    res.json(
-        {Json}
+    res.json({
+            json:Json,
+        }
     );
 
 })
