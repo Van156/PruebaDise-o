@@ -40,7 +40,7 @@ crossorigin="">
 
 const $form= document.querySelector("#form");
 
-$form.addEventListener("submit", (event)=>{ 
+$form.addEventListener("submit",  async (event)=>{ 
   event.preventDefault();
 
 
@@ -61,7 +61,7 @@ $form.addEventListener("submit", (event)=>{
     body:JSON.stringify(time),
   };
 
-   fetch('/Post',estructura).then( res=> {
+   await fetch('/Post',estructura).then( res=> {
      console.log(res.json());
    });
 
