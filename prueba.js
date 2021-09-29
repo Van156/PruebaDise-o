@@ -1,3 +1,4 @@
+const { json } = require('express');
 const mysql=require('mysql');
 //Base de datos conexion 
 
@@ -35,7 +36,7 @@ conexion.query("SELECT *from taxi_location WHERE fecha BETWEEN '22/09/2021'  AND
         return parseInt(row.hora.substring(0,2))<= 3;
     })
     console.log(datos.length);
-    console.log(datos)
-
+    //console.log(datos)
+    console.log(JSON.stringify(datos));
     
 })

@@ -136,10 +136,9 @@ app.post("/Post",(req,res)=>{
 
     
     res.json(
-        {
-           datos: datos, 
-        }
+        JSON.stringify(datos)
     )
+
 })
 
 
