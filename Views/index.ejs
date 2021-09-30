@@ -10,6 +10,8 @@
    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
    crossorigin=""/>
 
+   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
 </head>
 <body>
 
@@ -17,7 +19,7 @@
 
   <section class="type-election">
     <div>
-      <label for="tipoSelect">¿Qué desea ver?</label>
+      <label for="tipoSelect">¿Qué desea ver en el mapa?</label>
       <select id="tipoSelect" name="tipo">
         <option value="actual">Actual</option>
         <option value="historico">Histórico</option>
@@ -25,9 +27,9 @@
     </div>
   </section>
 
-<div>
-	<input id="datePicker" type="text" placeholder="Escoja rango de fechas"  />
-</div>  
+  <label for="dates">Escoga rango de horas</label>
+  <input type="text" id="dates">
+
 
   <section class="gps-information">
     <div id="gps"></div>
@@ -37,13 +39,20 @@
     <div id="myMap" style="width: 70%;height: 600px; margin: 1rem auto;"></div> 
   </section>
 
-<script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
 integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
 crossorigin="">
 </script>
+
+
 
 <script type="text/javascript">   
   
@@ -107,7 +116,11 @@ crossorigin="">
     setInterval(getGPS,5000);
 
 
-	const picker = new Litepicker({ element: document.getElementById('datePicker'), singleMode: false});
+    $('#dates').daterangepicker({
+      timePicker: true,
+      startDate: moment().startOf('hour'),
+      endDate: moment().startOf('hour').add(32, 'hour')
+    });
   </script>
 
 </body>
