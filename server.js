@@ -131,10 +131,13 @@ app.post("/Post",(req,res)=>{
         })
         
     })
+    console.log(datos.length)
     historico=[];
 
     for ( var j=0;j<datos.length;j++ ){
         historico.push([datos[j].latitud,datos[j].longitud]);
+        console.log("Los valores de j son ")
+        console.log(j)
     }
 
     console.log(historico);
