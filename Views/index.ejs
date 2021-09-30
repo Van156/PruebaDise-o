@@ -192,6 +192,7 @@ crossorigin="">
       if (document.querySelector("#tipoSelect").value === "historico") {
         document.querySelector("#form").style.display = "block";
         document.querySelector("#gps").style.display = "none";
+        clearInterval(setInterval(getGPS,5000));
       } else {
         latlngs=[];
         setInterval(getGPS,5000);
