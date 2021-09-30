@@ -62,7 +62,29 @@ crossorigin="">
 
 
 
-<script type="text/javascript">   
+<script type="text/javascript">  
+
+    var latitud=0;
+    var longitud=0;
+    var contador=0;
+    const showLocation = document.getElementById("gps");
+    var latlngs = [];
+
+
+    let myMap = L.map('myMap') // latitude, longitude y zoom
+
+    let markerInicial = L.marker([latitud, longitud]).addTo(myMap);
+      
+     L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`, {
+      maxZoom: 18,}).addTo(myMap);
+
+      myMap.setView([latitud, longitud], 14);
+
+      var polyline = L.polyline(latlngs, {color: '#4353ff'}).addTo(myMap);
+
+
+
+
     const $form= document.querySelector("#form");
 
     $form.addEventListener("submit",  async (event)=>{ 
@@ -105,26 +127,15 @@ crossorigin="">
       const res= await fetch('/Post',estructura);
       const historico= await res.json();
       console.log(historico.historico);
+      latlngs = historico.historico;
 
+      polyline.setLatLngs(latlngs, {color: '#4353ff'});
   }) ;
 
-    var latitud=0;
-    var longitud=0;
-    var contador=0;
-    const showLocation = document.getElementById("gps");
-    var latlngs = [];
+    
 
 
-    let myMap = L.map('myMap') // latitude, longitude y zoom
-
-    let markerInicial = L.marker([latitud, longitud]).addTo(myMap);
-      
-     L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`, {
-      maxZoom: 18,}).addTo(myMap);
-
-      myMap.setView([latitud, longitud], 14);
-
-      var polyline = L.polyline(latlngs, {color: '#4353ff'}).addTo(myMap);
+    
 
     async function getGPS() {
 
@@ -165,7 +176,7 @@ crossorigin="">
 
     document.addEventListener("load", getGPS());
 
-    setInterval(getGPS,5000);
+    
 
 
     $('#dates').daterangepicker({
@@ -182,6 +193,8 @@ crossorigin="">
         document.querySelector("#form").style.display = "block";
         document.querySelector("#gps").style.display = "none";
       } else {
+        latlngs=[];
+        setInterval(getGPS,5000);
         document.querySelector("#form").style.display = "none";
         document.querySelector("#gps").style.display = "block";
       }
