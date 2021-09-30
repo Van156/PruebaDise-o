@@ -138,8 +138,8 @@ app.post("/Post",(req,res)=>{
         historico.push([datos[j].latitud,datos[j].longitud]);
         console.log("Los valores de j son ")
         console.log(j)
-    }
-
+    };
+    console.log('los valores de historicos son:');
     console.log(historico);
 
     res.json({
