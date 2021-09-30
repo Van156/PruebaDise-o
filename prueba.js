@@ -36,7 +36,7 @@ conexion.query("SELECT *from taxi_location WHERE fecha BETWEEN '22/09/2021'  AND
         return parseInt(row.hora.substring(0,2))<= 3;
     })
     
-    //console.log(datos)
+    console.log(datos.length)
     historico=[];
 
     for ( var j=0;j<datos.length;j++ ){

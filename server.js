@@ -120,32 +120,30 @@ app.use(express.static('public'));
 app.post("/Post",(req,res)=>{
     console.log("Datos recibidos")
     console.log(req.body);
-    var datos=[];
+    
     conexion.query("SELECT *from taxi_location WHERE fecha BETWEEN '22/09/2021'  AND  '22/09/2021' ",(error,rows)=> {
         if (error) throw error
         console.log(rows.length);
         console.log(rows[0]);
-         datos= rows.filter((row)=>{
+       var datos= rows.filter((row)=>{
            // console.log(parseInt(row.hora.substring(0,)) );
             return parseInt(row.hora.substring(0,2))<= 3;
         })
+        console.log(datos.length)
+        historico=[];
+    
+        for ( var j=0;j<datos.length;j++ ){
+            historico.push([datos[j].latitud,datos[j].longitud]);
+            
+        };
         
-    })
-    console.log(datos.length)
-    historico=[];
-
-    for ( var j=0;j<datos.length;j++ ){
-        historico.push([datos[j].latitud,datos[j].longitud]);
-        console.log("Los valores de j son ")
-        console.log(j)
-    };
-    console.log('los valores de historicos son:');
-    console.log(historico);
-
-    res.json({
-        historico : historico,
-        json: JSON.stringify(datos),
+        res.json({
+            historico : historico,
+        });
+        
+        
     });
+    
     
 
 })
