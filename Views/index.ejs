@@ -176,7 +176,7 @@ crossorigin="">
 
     document.addEventListener("load", getGPS());
 
-    
+    let interval = setInterval(getGPS,5000);
 
 
     $('#dates').daterangepicker({
@@ -192,7 +192,7 @@ crossorigin="">
       if (document.querySelector("#tipoSelect").value === "historico") {
         document.querySelector("#form").style.display = "block";
         document.querySelector("#gps").style.display = "none";
-        clearInterval(setInterval(getGPS,5000));
+        clearInterval(interval);
       } else {
         latlngs=[];
         setInterval(getGPS,5000);
