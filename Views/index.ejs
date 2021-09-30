@@ -179,7 +179,9 @@ crossorigin="">
 
     document.querySelector("#tipoSelect").addEventListener("change", (e)=>{
       if (document.querySelector("#tipoSelect").value === "historico") {
-        document.querySelector("#form")
+        document.querySelector("#form").style.display = "block";
+      } else {
+        document.querySelector("#form").style.display = "none";
       }
     });
 
