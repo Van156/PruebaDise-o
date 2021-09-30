@@ -29,7 +29,7 @@
 
   <form id="form" class="dates-div">
     <label for="dates">Escoga rango de horas</label>
-    <input type="text" id="dates">
+    <input type="text" name="dates">
     <button >Enviar fechas</button>
   </form>
 
@@ -57,7 +57,31 @@ crossorigin="">
 
 
 <script type="text/javascript">   
-  
+    const $form= document.querySelector("#form");
+
+    $form.addEventListener("submit",  async (event)=>{ 
+      event.preventDefault();
+
+
+      const formData= new FormData($form);
+      var Rangofechas=String(formData.get('dates') );
+      console.log(typeof(formData.get('fecha')));
+      var fecha_='2021-09-01 - 2021-09-03';
+      var hora_='08:00-09:00';
+      const estructura={
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+        },
+        body:JSON.stringify([fecha_,hora_]),
+      };
+
+      const res= await fetch('/Post',estructura);
+      const historico= await res.json();
+      console.log(historico)
+
+  }) ;
+
     var latitud=0;
     var longitud=0;
     var contador=0;
