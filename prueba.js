@@ -39,8 +39,8 @@ conexion.query("SELECT *from taxi_location WHERE fecha BETWEEN '22/09/2021'  AND
     //console.log(datos)
     historico=[];
 
-    for ( let k in datos ){
-        historico.push([k.latitud,K.longitud]);
+    for ( var j=0;j<datos.length;j++ ){
+        historico.push([datos[j].latitud,datos[j].longitud]);
     }
     console.log(historico)
     
