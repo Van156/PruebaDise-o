@@ -130,7 +130,7 @@ app.post("/Post",(req,res)=>{
     var fechaFinal_="'"+fechaFinal+"'"
     
 
-    conexion.query("SELECT * FROM taxi_location WHERE fecha  BEWTEEN "+fechaInicial_+" AND "+fechaFinal_+"",(error,rows)=> {
+    conexion.query("SELECT * FROM taxi_location WHERE fecha  BETWEEN "+fechaInicial_+" AND "+fechaFinal_+"",(error,rows)=> {
         if (error) throw error
         console.log(rows.length);
         console.log(rows[0]);
