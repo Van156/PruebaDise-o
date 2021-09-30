@@ -67,14 +67,33 @@ crossorigin="">
       var rangoFechas=String(formData.get('dates') );
       console.log(typeof(formData.get('dates')));
       console.log(rangoFechas);
-      var fecha_='2021-09-22 - 2021-09-23';
-      var hora_='03:00-09:00';
+      var array= rangoFechas.split(' ');
+      var fechas=array[0]+' - '+array[4];
+      var horaInicial='';
+      var horaFinal='';
+      if(array[2]==='PM'){
+            horaInicial=String(parseInt(array[1].substring(0,2))+12)+array[1].substring(2,5);
+      }
+      else{
+        horaInicial=array[1];
+      }
+
+      if(array[6]==='PM'){
+        horaFinal=String(parseInt(array[5].substring(0,2))+12)+array[5].substring(2,5);
+        }
+        else{
+        horaFinal=array[5];
+        }
+      
+
+   var horas=horaInicial+'-'+horaFinal;
+   console.log(horas);
       const estructura={
         method:'POST',
         headers:{
           'Content-Type':'application/json',
         },
-        body:JSON.stringify([fecha_,hora_]),
+        body:JSON.stringify([fechas,horas]),
       };
 
       const res= await fetch('/Post',estructura);
