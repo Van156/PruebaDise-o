@@ -155,7 +155,7 @@ app.post("/Post",(req,res)=>{
 	
     rango=rango.substring(0,rango.length-1)+')';
 
-    conexion.query("SELECT *from taxi_location WHERE fecha  IN "+rango+"",(error,rows)=> {
+    conexion.query("SELECT * FROM taxi_location WHERE fecha  IN "+rango+"",(error,rows)=> {
         if (error) throw error
         console.log(rows.length);
         console.log(rows[0]);
