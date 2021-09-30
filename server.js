@@ -135,8 +135,8 @@ app.post("/Post",(req,res)=>{
     })
     historico=[];
 
-    for ( let k in datos ){
-        historico.push([k.latitud,K.longitud]);
+    for (  k in datos ){
+        historico.push([datos[k].latitud,datos[K].longitud]);
     }
 
     res.json({historico:historico});
