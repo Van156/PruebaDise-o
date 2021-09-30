@@ -122,7 +122,7 @@ app.post("/Post",(req,res)=>{
     console.log(req.body);
     //"2021-09-01 - 2021-09-03"
     //"2021-09-22 - 2021-09-22"
-    var rangoFecha=req.rangoFecha;
+    var rangoFecha=req.body[0];
     var fechaInicial=rangoFecha.substring(8,10)+'/'+rangoFecha.substring(5,7)+'/'+rangoFecha.substring(0,4);
     var diaInicial=parseInt(rangoFecha.substring(8,10))
     var mesInicial=parseInt(rangoFecha.substring(5,7));
@@ -159,7 +159,7 @@ app.post("/Post",(req,res)=>{
         if (error) throw error
         console.log(rows.length);
         console.log(rows[0]);
-        var rangoHora=req.body.rangoHora;
+        var rangoHora=req.body[1];
         var horaInicial=rangoHora.substring(0,5);
         var horaFinal=rangoHora.substring(6,11)
        var datos= rows.filter((row)=>{
