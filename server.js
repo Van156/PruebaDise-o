@@ -164,7 +164,7 @@ app.post("/Post",(req,res)=>{
         var horaFinal=rangoHora.substring(6,11)
        var datos= rows.filter((row)=>{
            // console.log(parseInt(row.hora.substring(0,)) );
-        return (row.fecha==fechaFinal && parseInt(row.hora.substring(0,2))<= paraseInt(horaFinal.substring(0,2)) ) || (row.fecha==fechaInicial && parseInt(row.hora.substring(0,2))>= paraseInt(horaInicial.substring(0,2)) ) || (row.fecha!=fechaInicial && row.fecha!=fechaFinal);
+        return (row.fecha==fechaFinal && parseInt(row.hora.substring(0,2))<= parseInt(horaFinal.substring(0,2)) ) || (row.fecha==fechaInicial && parseInt(row.hora.substring(0,2))>= parseInt(horaInicial.substring(0,2)) ) || (row.fecha!=fechaInicial && row.fecha!=fechaFinal);
         
     })
         console.log(datos.length)
