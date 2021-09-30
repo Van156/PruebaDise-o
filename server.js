@@ -129,8 +129,6 @@ app.post("/Post",(req,res)=>{
            // console.log(parseInt(row.hora.substring(0,)) );
             return parseInt(row.hora.substring(0,2))<= 3;
         })
-        console.log(datos.length);
-        console.log(datos)
         
     })
     historico=[];
@@ -140,6 +138,7 @@ app.post("/Post",(req,res)=>{
     }
 
     console.log(historico);
+
     res.json({
         historico : historico,
         json: JSON.stringify(datos),
