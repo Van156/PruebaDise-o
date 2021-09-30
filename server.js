@@ -124,38 +124,13 @@ app.post("/Post",(req,res)=>{
     //"2021-09-22 - 2021-09-22"
     var rangoFecha=req.body[0];
     var fechaInicial=rangoFecha.substring(8,10)+'/'+rangoFecha.substring(5,7)+'/'+rangoFecha.substring(0,4);
-    var diaInicial=parseInt(rangoFecha.substring(8,10))
-    var mesInicial=parseInt(rangoFecha.substring(5,7));
-    var añoInicial=parseInt(rangoFecha.substring(0,4));
     var fechaFinal=rangoFecha.substring(21,23)+'/'+rangoFecha.substring(18,20)+'/'+rangoFecha.substring(13,17);
-    var diaFinal=parseInt(rangoFecha.substring(21,23));
-    var mesFinal=parseInt(rangoFecha.substring(18,20));
-    var añoFinal=parseInt(rangoFecha.substring(13,17));
-    var rango='(';
-    var aux='';
-    console.log(mesFinal-mesInicial);
-    console.log(diaFinal-diaInicial);
-    for (var i=0;i<=(mesFinal-mesInicial); i++){
-        for (var p=0;p<=(diaFinal-diaInicial); p++){
-            if (diaInicial+p<10){
-            aux='0'+String(diaInicial+p)+'/';
-            }
-            else{
-                aux=String(diaInicial+p)+'/';
-            }
-            if (mesInicial+i<10){
-                aux=aux+'0'+String(mesInicial+i)+'/'+String(añoInicial);
-                }
-                else{
-                    aux=aux+String(mesInicial+i)+'/'+String(añoInicial);
-                }
-            rango=rango+"'"+aux+"',";    
-        }
-    }
-	
-    rango=rango.substring(0,rango.length-1)+')';
+    
+    var fechaInicial_="'"+fechaInicial+"'";
+    var fechaFinal_="'"+fechaFinal+"'"
+    
 
-    conexion.query("SELECT * FROM taxi_location WHERE fecha  IN "+rango+"",(error,rows)=> {
+    conexion.query("SELECT * FROM taxi_location WHERE fecha  BEWTEEN "+fechaInicial_+" AND "+fechaFinal_+"",(error,rows)=> {
         if (error) throw error
         console.log(rows.length);
         console.log(rows[0]);
