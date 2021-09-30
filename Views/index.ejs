@@ -27,9 +27,11 @@
     </div>
   </section>
 
-  <label for="dates">Escoga rango de horas</label>
-  <input type="text" id="dates">
-
+  <form id="form" class="dates-div">
+    <label for="dates">Escoga rango de horas</label>
+    <input type="text" id="dates">
+    <button >Enviar fechas</button>
+  </form>
 
   <section class="gps-information">
     <div id="gps"></div>
@@ -121,7 +123,7 @@ crossorigin="">
       startDate: moment().startOf('hour'),
       endDate: moment().startOf('hour').add(32, 'hour'),
     locale: {
-      format: 'MM/DD/YYYY hh:mm A'
+      format: 'DD/MM/YYYY hh:mm A'
     }
     });
   </script>
