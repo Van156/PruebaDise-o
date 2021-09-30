@@ -139,7 +139,11 @@ app.post("/Post",(req,res)=>{
         historico.push([datos[j].latitud,datos[j].longitud]);
     }
 
-    res.json({historico:historico});
+    console.log(historico);
+    res.json({
+        historico : historico,
+        json: JSON.stringify(datos),
+    });
     
 
 })
