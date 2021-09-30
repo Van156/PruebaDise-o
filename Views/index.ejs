@@ -61,9 +61,9 @@ $form.addEventListener("submit",  async (event)=>{
     body:JSON.stringify(time),
   };
 
-   await fetch('/Post',estructura).then( res=> {
-     console.log(res.json());
-   });
+  const res= await fetch('/Post',estructura);
+  const historico= await res.json();
+  console.log(historico);
 
 }) ;
 
