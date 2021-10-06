@@ -134,6 +134,12 @@ crossorigin="">
       markerInicial.setLatLng(historico.historico[historico.historico.length-1]);
   }) ;
 
+
+  polyline.on('popupopen', function (e) {
+    var popup = e.popup;
+    popup.setContent('Coordinates: ' +  popup.getLatLng().lng + ' / ' + popup.getLatLng().lat);
+  });
+
     
 
 
