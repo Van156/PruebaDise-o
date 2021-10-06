@@ -80,7 +80,7 @@ crossorigin="">
 
       myMap.setView([latitud, longitud], 14);
 
-      var polyline = L.polyline(latlngs, {color: '#4353ff'}).addTo(myMap);
+      var polyline = L.polyline(latlngs, {color: '#4353ff',weight:2}).addTo(myMap);
 
       var popup = L.popup();
 
@@ -142,7 +142,8 @@ crossorigin="">
   polyline.on('click',(e)=>{
 
     popup.setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString()).openOn(myMap);
-    console.log(e);_
+
+    console.log(e);
   })
 
     
