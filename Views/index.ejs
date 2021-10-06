@@ -136,7 +136,7 @@ crossorigin="">
 
 
   polyline.on('popupopen', function (e) {
-    var popup = e.popup;
+    var popup = L.popup;
     popup.setContent('Coordinates: ' +  popup.getLatLng().lng + ' / ' + popup.getLatLng().lat);
   });
 
