@@ -149,7 +149,7 @@ app.post("/Post",(req,res)=>{
             historico.push([datos[j].latitud,datos[j].longitud]);
         };
         for ( var j=0;j<datos.length;j++ ){
-            historico.push([datos[j].fecha,datos[j].hora]);
+            dates.push([datos[j].fecha,datos[j].hora]);
         };
         
         res.json({
