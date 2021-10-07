@@ -1,234 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taxi Tracking</title>
 
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-   crossorigin=""/>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
 
-   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"
+    />
 
-   
-   <style>
-     .dates-div {
-        display: none;
-      }
-   </style>
-</head>
-<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;800&display=swap"
+      rel="stylesheet"
+    />
 
-  <h1>Taxi Tracking</h1>
+    <link rel="stylesheet" href="/public/styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container log">
+        <div class="logo1">
+          <img src="/public/images/taxi (2).png" alt="logo" />
+        </div>
+        <a href="#" class="logo">Taxi Tracking</a>
+      </div>
+    </header>
 
-  <section class="type-election">
-    <div>
-      <label for="tipoSelect">¿Qué desea ver en el mapa?</label>
-      <select id="tipoSelect" name="tipo">
-        <option value="actual">Actual</option>
-        <option value="historico">Histórico</option>
-      </select> 
-    </div>
-  </section>
+    <section class="type-election">
+      <div class="container u-txt-center">
+        <label for="tipoSelect" class="input-label"
+          >¿Qué desea ver en el mapa?</label
+        >
+        <select class="input-field" id="tipoSelect" name="tipo">
+          <option value="actual">Actual</option>
+          <option value="historico">Histórico</option>
+        </select>
+      </div>
+    </section>
 
-  <form id="form" class="dates-div">
-    <label for="dates">Escoga rango de horas</label>
-    <input type="text" name="dates" id="dates">
-    <button >Enviar fechas</button>
-  </form>
+    <form id="form" class="type-election dates-div">
+      <div class="container u-txt-center">
+        <label for="dates" class="input-label">Escoga el rango de fechas</label>
+        <input class="input-field" type="text" name="dates" id="dates" />
+        <button class="send-button">Enviar fechas</button>
+      </div>
+    </form>
 
-  <section class="gps-information">
-    <div id="gps"></div>
+    <section class="gps-information">
+      <div class="container">
+        <div id="gps" class="gps"></div>
 
-    <h2>Mapa</h2>
+        <div
+          id="myMap"
+          class="mapa"
+        ></div>
+      </div>
+    </section>
 
-    <div id="myMap" style="width: 70%;height: 600px; margin: 1rem auto;"></div> 
-  </section>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
+    ></script>
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
 
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script type="text/javascript">
+      var latitud = 0;
+      var longitud = 0;
+      var contador = 0;
+      const showLocation = document.getElementById("gps");
+      var latlngs = [];
+      var dates = [];
 
+      let myMap = L.map("myMap"); // latitude, longitude y zoom
 
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-crossorigin="">
-</script>
+      let markerInicial = L.marker([latitud, longitud]).addTo(myMap);
 
-
-
-<script type="text/javascript">  
-
-    var latitud=0;
-    var longitud=0;
-    var contador=0;
-    const showLocation = document.getElementById("gps");
-    var latlngs = [];
-    var dates=[];
-
-
-    let myMap = L.map('myMap') // latitude, longitude y zoom
-
-    let markerInicial = L.marker([latitud, longitud]).addTo(myMap);
-      
-     L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`, {
-      maxZoom: 18,}).addTo(myMap);
+      L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`, {
+        maxZoom: 18,
+      }).addTo(myMap);
 
       myMap.setView([latitud, longitud], 14);
 
-      var polyline = L.polyline(latlngs, {color: '#4353ff',weight:6}).addTo(myMap);
+      var polyline = L.polyline(latlngs, { color: "#4353ff", weight: 6 }).addTo(
+        myMap
+      );
 
       var popup = L.popup();
 
+      const $form = document.querySelector("#form");
 
-    const $form= document.querySelector("#form");
+      $form.addEventListener("submit", async (event) => {
+        event.preventDefault();
 
-    $form.addEventListener("submit",  async (event)=>{ 
-      event.preventDefault();
-
-
-      const formData= new FormData($form);
-      var rangoFechas=String(formData.get('dates') );
-      console.log(typeof(formData.get('dates')));
-      console.log(rangoFechas);
-      var array= rangoFechas.split(' ');
-      var fechas=array[0]+' - '+array[4];
-      var horaInicial='';
-      var horaFinal='';
-      if(array[2]==='PM'){
-            horaInicial=String(parseInt(array[1].substring(0,2))+12)+array[1].substring(2,5);
-      }
-      else{
-        horaInicial=array[1];
-      }
-
-      if(array[6]==='PM'){
-        horaFinal=String(parseInt(array[5].substring(0,2))+12)+array[5].substring(2,5);
+        const formData = new FormData($form);
+        var rangoFechas = String(formData.get("dates"));
+        console.log(typeof formData.get("dates"));
+        console.log(rangoFechas);
+        var array = rangoFechas.split(" ");
+        var fechas = array[0] + " - " + array[4];
+        var horaInicial = "";
+        var horaFinal = "";
+        if (array[2] === "PM") {
+          horaInicial =
+            String(parseInt(array[1].substring(0, 2)) + 12) +
+            array[1].substring(2, 5);
+        } else {
+          horaInicial = array[1];
         }
-        else{
-        horaFinal=array[5];
+
+        if (array[6] === "PM") {
+          horaFinal =
+            String(parseInt(array[5].substring(0, 2)) + 12) +
+            array[5].substring(2, 5);
+        } else {
+          horaFinal = array[5];
         }
-      
 
-   var horas=horaInicial+'-'+horaFinal;
-   console.log(horas);
-      const estructura={
-        method:'POST',
-        headers:{
-          'Content-Type':'application/json',
-        },
-        body:JSON.stringify([fechas,horas]),
-      };
+        var horas = horaInicial + "-" + horaFinal;
+        
+        const estructura = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify([fechas, horas]),
+        };
 
-      const res= await fetch('/Post',estructura);
-      const historico= await res.json();
-      console.log(historico.historico);
-      latlngs = historico.historico;
-      dates =historico.dates;
+        const res = await fetch("/Post", estructura);
+        const historico = await res.json();
+        console.log(historico.historico);
+        latlngs = historico.historico;
+        dates = historico.dates;
 
-      polyline.setLatLngs(latlngs, {color: '#4353ff'});
+        polyline.setLatLngs(latlngs, { color: "#4353ff" });
 
-      markerInicial.setLatLng(historico.historico[historico.historico.length-1]);
-  }) ;
+        markerInicial.setLatLng(
+          historico.historico[historico.historico.length - 1]
+        );
 
+        myMap.panTo( historico.historico[historico.historico.length - 1]);
+      });
 
-  // polyline.on('popupopen', function (e) {
-    
-  //   popup.setContent('Coordinates: ' +  popup.getLatLng().lng + ' / ' + popup.getLatLng().lat);
-  // });
-  polyline.on('click',(e)=>{
+      polyline.on("click", (e) => {
+        console.log(e);
 
-    
+        var counts = [];
+        for (var j = 0; j < latlngs.length; j++) {
+          counts.push(latlngs[j][0]);
+        }
 
-    console.log(e);
+        goal = parseFloat(e.latlng.lat);
+        var closest = counts.reduce(function (prev, curr) {
+          return Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev;
+        });
+        console.log(counts.indexOf(closest));
+        var index = counts.indexOf(closest);
+        popup
+          .setLatLng(e.latlng)
+          .setContent(
+            "Clickeaste aquí " +
+              e.latlng.toString() +
+              "n\ fecha : " +
+              dates[index][0] +
+              " hora : " +
+              dates[index][1]
+          )
+          .openOn(myMap);
+      });
 
-    var counts =[];
-    for ( var j=0;j<latlngs.length;j++ ){
-            counts.push(latlngs[j][0]);
-      };
-   
-    goal = parseFloat(e.latlng.lat);
-    var closest = counts.reduce(function(prev, curr) {
-    return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
-    });
-    console.log(counts.indexOf(closest));
-    var index=counts.indexOf(closest);
-    popup.setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString() +"n\ fecha : "+dates[index][0]+ " hora : "+dates[index][1] ).openOn(myMap);
-
-  })
-
-    
-
-
-    
-
-    async function getGPS() {
-
+      async function getGPS() {
         const response = await fetch("./prueba", {
-            // mode: 'no-cors'
+         
         });
 
         let responseJson = await response.json();
 
-        showLocation.innerHTML = await (`Latitud: ${responseJson.latitud}, 
+        showLocation.innerHTML = await `Latitud: ${responseJson.latitud}, 
                                   Longitud: ${responseJson.longitud},
                                   Fecha: ${responseJson.fecha},
                                   Hora: ${responseJson.hora},
-                                  Numero: ${responseJson.contador}`);
-      
-        latitud=parseFloat(responseJson.latitud);
-        longitud=parseFloat(responseJson.longitud);
+                                  Numero: ${responseJson.contador}`;
 
-       //myMap.panTo([latitud, longitud]);
-	
-       myMap.panTo([latitud, longitud]);
+        latitud = parseFloat(responseJson.latitud);
+        longitud = parseFloat(responseJson.longitud);
 
-       if (latitud!=0){
-       latlngs.push([latitud, longitud]);
+        myMap.panTo([latitud, longitud]);
 
-       polyline.setLatLngs(latlngs, {color: '#4353ff'}); //Añaduir esta coordenada a la polilinea
+        if (latitud != 0) {
+          latlngs.push([latitud, longitud]);
+
+          polyline.setLatLngs(latlngs, { color: "#4353ff" }); //Añaduir esta coordenada a la polilinea
+        }
+
+        markerInicial.setLatLng([latitud, longitud]);
       }
 
-      markerInicial.setLatLng([latitud, longitud]);
+      document.addEventListener("load", getGPS());
 
-    };
+      let interval = setInterval(getGPS, 5000);
 
-    document.addEventListener("load", getGPS());
+      $("#dates").daterangepicker({
+        timePicker: true,
+        startDate: moment().startOf("hour"),
+        endDate: moment().startOf("hour").add(32, "hour"),
+        locale: {
+          format: "YYYY/MM/DD hh:mm A",
+        },
+      });
 
-    let interval = setInterval(getGPS,5000);
-
-
-    $('#dates').daterangepicker({
-      timePicker: true,
-      startDate: moment().startOf('hour'),
-      endDate: moment().startOf('hour').add(32, 'hour'),
-    locale: {
-      format: 'YYYY/MM/DD hh:mm A'
-    }
-    });
-
-    document.querySelector("#tipoSelect").addEventListener("change", (e)=>{
-      if (document.querySelector("#tipoSelect").value === "historico") {
-        document.querySelector("#form").style.display = "block";
-        document.querySelector("#gps").style.display = "none";
-        clearInterval(interval);
-      } else {
-        latlngs=[];
-        setInterval(getGPS,5000);
-        document.querySelector("#form").style.display = "none";
-        document.querySelector("#gps").style.display = "block";
-      }
-    });
-
-
-
-  </script>
-
-</body>
-
+      document.querySelector("#tipoSelect").addEventListener("change", (e) => {
+        if (document.querySelector("#tipoSelect").value === "historico") {
+          document.querySelector("#form").style.display = "block";
+          document.querySelector("#gps").style.display = "none";
+          clearInterval(interval);
+        } else {
+          latlngs = [];
+          setInterval(getGPS, 5000);
+          document.querySelector("#form").style.display = "none";
+          document.querySelector("#gps").style.display = "block";
+        }
+      });
+    </script>
+  </body>
 </html>

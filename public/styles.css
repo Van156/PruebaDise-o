@@ -1,0 +1,87 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: "Mulish", sans-serif;
+  font-size: 1rem;
+  line-height: 1.2em;
+}
+.container {
+  width: 95%;
+  max-width: 1150px;
+  margin: auto auto;
+}
+.u-txt-center {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.header {
+  background-color: #7D54C0;
+  color: white;
+  padding:  24px 0;
+}
+.logo {
+  color: white;
+  text-decoration: none;
+  font-weight: 800;
+  font-size:   39px;
+  margin-left: 35px;
+}
+h1 {
+  font-size: 2rem;
+  line-height: 1.3em;
+  width: 95%;
+  max-width: 1150px;
+  margin: 0.8em auto;
+}
+h2 {
+  font-size: 2rem;
+  line-height: 1.3em;
+  width: 95%;
+  max-width: 1150px;
+  margin: 0.8em auto;
+}
+.type-election {
+  padding: 35px 0 0;
+}
+.input-label {
+  font-weight: normal;
+  font-size:   22px;
+  color:   #452B6F;
+  margin-bottom:  20px;
+}
+.input-field {
+  width:  20%;
+  margin-bottom:  5px;
+}
+.dates-div {
+  width: 95%;
+  max-width: 1150px;
+  margin: auto auto;
+  padding: 35px 0;
+  display: none;
+}
+.send-button {
+  background-color: #F2C94C;
+  border-radius: 4px;
+  color:        white;
+  padding:        16px 30px;
+  margin-top:     15px;
+}
+.gps {
+  margin: 30px 0;
+  text-align: center;
+}
+.log {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.mapa {
+    height: 600px; 
+    margin: 1rem auto;
+    border: 4px solid #8D4FF3;
+}

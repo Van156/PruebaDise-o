@@ -66,7 +66,6 @@ udpServer.on('message',(msg,rinfo)=>{
     contador = contador +1
 
     var datos  = "INSERT INTO taxi_location (latitud,longitud,fecha,hora) "+"VALUES('"+latitud+"','"+longitud+"','"+fecha+"','"+hora+"')";
-    //var ubicacion=[[latitud,longitud,fecha,hora]];
     conexion.query(datos,(error, rows) => {
         if(error)  throw error
         console.log("Datos enviados");
@@ -115,13 +114,12 @@ app.post("/Pull",(req,res)=>{
 })
 
 app.use(express.json({ limit:'4mb' }));
-app.use(express.static('public'));
+app.use("/public", express.static(__dirname+"/public"));
 
 app.post("/Post",(req,res)=>{
     console.log("Datos recibidos")
     console.log(req.body);
-    //"2021-09-01 - 2021-09-03"
-    //"2021-09-22 - 2021-09-22"
+    
     var rangoFecha=req.body[0];
     var fechaInicial=rangoFecha.substring(8,10)+'/'+rangoFecha.substring(5,7)+'/'+rangoFecha.substring(0,4);
     var fechaFinal=rangoFecha.substring(21,23)+'/'+rangoFecha.substring(18,20)+'/'+rangoFecha.substring(13,17);
@@ -138,7 +136,6 @@ app.post("/Post",(req,res)=>{
         var horaInicial=rangoHora.substring(0,5);
         var horaFinal=rangoHora.substring(6,11)
        var datos= rows.filter((row)=>{
-           // console.log(parseInt(row.hora.substring(0,)) );
         return (row.fecha==fechaFinal && parseInt(row.hora.substring(0,2))<= parseInt(horaFinal.substring(0,2)) ) || (row.fecha==fechaInicial && parseInt(row.hora.substring(0,2))>= parseInt(horaInicial.substring(0,2)) ) || (row.fecha!=fechaInicial && row.fecha!=fechaFinal);
         
     })
@@ -163,12 +160,6 @@ app.post("/Post",(req,res)=>{
     
 
 })
-
-
-// conexion.end()
-
-//F en el chat 
-
 
 app.listen(port,()=>{
     console.log('Servidor Web en el puerto ', port)
