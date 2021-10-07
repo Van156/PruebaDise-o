@@ -149,7 +149,7 @@ crossorigin="">
 
     var counts =[];
     for ( var j=0;j<latlngs.length;j++ ){
-            counts.push(latlngs[0][j]);
+            counts.push(latlngs[j][0]);
       };
    
     goal = parseFloat(e.latlng.lat);
@@ -158,7 +158,7 @@ crossorigin="">
     });
     console.log(counts.indexOf(closest));
     var index=counts.indexOf(closest);
-    popup.setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString() +"n\ fecha : "+dates[0][index]+ " hora : "+dates[1][index] ).openOn(myMap);
+    popup.setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString() +"n\ fecha : "+dates[index][0]+ " hora : "+dates[index][1] ).openOn(myMap);
 
   })
 
