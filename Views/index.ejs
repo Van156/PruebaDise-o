@@ -148,15 +148,13 @@ crossorigin="">
     console.log(e);
 
     var counts =[];
-    for ( var j=0;j<latlngs.length;j++ ){
-            counts.push(parseFloat(latlngs[0][j]));
-    };
+   
     goal = parseFloat(e.latlng.lat);
     var closest = counts.reduce(function(prev, curr) {
     return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
     });
-    console.log(closest.indexOf(closest));
-    var index=closest.indexOf(closest);
+    console.log(counts.indexOf(closest));
+    var index=counts.indexOf(closest);
     popup.setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString()).openOn(myMap+"\ fecha : "+dates[0][index]+ " hora : "+dates[0][index]);
 
   })
