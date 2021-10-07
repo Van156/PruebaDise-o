@@ -147,8 +147,11 @@ crossorigin="">
 
     console.log(e);
 
-    var counts = latlng[0];
-    goal = e.latlng.lat;
+    var counts =[];
+    for ( var j=0;j<latlng.length;j++ ){
+            counts.push(parseFloat(latlng[0][j]));
+    };
+    goal = parseFloat(e.latlng.lat);
     var closest = counts.reduce(function(prev, curr) {
     return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
     });
