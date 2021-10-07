@@ -69,6 +69,7 @@ crossorigin="">
     var contador=0;
     const showLocation = document.getElementById("gps");
     var latlngs = [];
+    var dates=[];
 
 
     let myMap = L.map('myMap') // latitude, longitude y zoom
@@ -128,6 +129,7 @@ crossorigin="">
       const historico= await res.json();
       console.log(historico.historico);
       latlngs = historico.historico;
+      dates =historico.dates;
 
       polyline.setLatLngs(latlngs, {color: '#4353ff'});
 
@@ -141,9 +143,19 @@ crossorigin="">
   // });
   polyline.on('click',(e)=>{
 
-    popup.setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString()).openOn(myMap);
+    
 
     console.log(e);
+
+    var counts = latlng[0];
+    goal = e.latlng.lat;
+    var closest = counts.reduce(function(prev, curr) {
+    return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
+    });
+    console.log(closest.indexOf(closest));
+    var index=closest.indexOf(closest);
+    popup.setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString()).openOn(myMap+"\ fecha : "+dates[0][index]+ " hora : "+dates[0][index]);
+
   })
 
     
