@@ -97,10 +97,13 @@
       const showLocation = document.getElementById("gps");
       var latlngs = [];
       var dates = [];
+      var taxi1=[];
+      var taxi2=[];
 
       let myMap = L.map("myMap"); // latitude, longitude y zoom
 
       let markerInicial = L.marker([latitud, longitud]).addTo(myMap);
+      let markerInicial2 = L.marker([latitud, longitud]).addTo(myMap);
 
       L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`, {
         maxZoom: 18,
@@ -112,7 +115,12 @@
         myMap
       );
 
+      var polyline2 = L.polyline(latlngs, { color: "#43ff56", weight: 6 }).addTo(
+        myMap
+      );
+
       var popup = L.popup();
+      var popup2 = L.popup();
 
       const $form = document.querySelector("#form");
 
@@ -158,22 +166,34 @@
         console.log(historico.historico);
         latlngs = historico.historico;
         dates = historico.dates;
+        var datesTaxi1=historico.datesTaxi1;
+        var datesTaxi2=historico.datesTaxi2;
+        var taxi1=historico.taxi1;
+        var taxi2=historico.taxi2;
 
-        polyline.setLatLngs(latlngs, { color: "#4353ff" });
+        //polyline.setLatLngs(latlngs, { color: "#4353ff" });
+        polyline.setLatLngs(taxi1, { color: "#4353ff" });
+        polyline2.setLatLngs(taxi2, { color: "#43ff56" });
 
         markerInicial.setLatLng(
-          historico.historico[historico.historico.length - 1]
+          historico.taxi1[historico.taxi1.length - 1]
         );
+
+        markerInicial2.setLatLng(
+          historico.taxi2[historico.taxi2.length - 1]
+        );
+
 
         myMap.panTo( historico.historico[historico.historico.length - 1]);
       });
+
 
       polyline.on("click", (e) => {
         console.log(e);
 
         var counts = [];
-        for (var j = 0; j < latlngs.length; j++) {
-          counts.push(latlngs[j][0]);
+        for (var j = 0; j < taxi1.length; j++) {
+          counts.push(taxi1[j][0]);
         }
 
         goal = parseFloat(e.latlng.lat);
@@ -188,9 +208,36 @@
             "Clickeaste aquí " +
               e.latlng.toString() +
               "n\ fecha : " +
-              dates[index][0] +
+              datesTaxi1[index][0] +
               " hora : " +
-              dates[index][1]
+              datesTaxi1[index][1]
+          )
+          .openOn(myMap);
+      });
+
+      polyline2.on("click", (e) => {
+        console.log(e);
+
+        var counts = [];
+        for (var j = 0; j < taxi2.length; j++) {
+          counts.push(taxi2[j][0]);
+        }
+
+        goal = parseFloat(e.latlng.lat);
+        var closest = counts.reduce(function (prev, curr) {
+          return Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev;
+        });
+        console.log(counts.indexOf(closest));
+        var index = counts.indexOf(closest);
+        popup
+          .setLatLng(e.latlng)
+          .setContent(
+            "Clickeaste aquí " +
+              e.latlng.toString() +
+              "n\ fecha : " +
+              datesTaxi2[index][0] +
+              " hora : " +
+              datesTaxi2[index][1]
           )
           .openOn(myMap);
       });
@@ -210,16 +257,23 @@
 
         latitud = parseFloat(responseJson.latitud);
         longitud = parseFloat(responseJson.longitud);
-
+        var taxi=responseJson.taxi;
         myMap.panTo([latitud, longitud]);
 
         if (latitud != 0) {
-          latlngs.push([latitud, longitud]);
-
-          polyline.setLatLngs(latlngs, { color: "#4353ff" }); //Añaduir esta coordenada a la polilinea
+          if (taxi==='1'){
+            taxi1.push([latitud,longitud]);
+            markerInicial.setLatLng([latitud, longitud]);
+          }
+          if(taxi==='2'){
+            taxi2.push([latitud,longitud]);
+            markerInicial2.setLatLng([latitud, longitud]);
+          }
+          polyline.setLatLngs(taxi1, { color: "#4353ff" }); //Añaduir esta coordenada a la polilinea
+          polyline2.setLatLngs(taxi2, { color: "#43ff56" });
         }
 
-        markerInicial.setLatLng([latitud, longitud]);
+        
       }
 
       document.addEventListener("load", getGPS());
@@ -242,7 +296,9 @@
           clearInterval(interval);
         } else {
           latlngs = [];
-          setInterval(getGPS, 5000);
+          taxi1=[];
+          taxi2=[];
+          setInterval(getGPS, 1000);
           document.querySelector("#form").style.display = "none";
           document.querySelector("#gps").style.display = "block";
         }

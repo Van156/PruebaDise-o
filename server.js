@@ -7,6 +7,7 @@ var latitud = '';
 var longitud = '';
 var fecha='';
 var hora='';
+var taxi='';
 
 //Usar variables de entorno de archivo .env para info privada
 
@@ -62,10 +63,11 @@ udpServer.on('message',(msg,rinfo)=>{
     longitud = vector[3];
     fecha=vector[5];
     hora=vector[7];
+    taxi=vector[9];
 
     contador = contador +1
 
-    var datos  = "INSERT INTO taxi_location (latitud,longitud,fecha,hora) "+"VALUES('"+latitud+"','"+longitud+"','"+fecha+"','"+hora+"')";
+    var datos  = "INSERT INTO taxi_location (latitud,longitud,fecha,hora,taxi) "+"VALUES('"+latitud+"','"+longitud+"','"+fecha+"','"+hora+"','"+taxi+"')";
     conexion.query(datos,(error, rows) => {
         if(error)  throw error
         console.log("Datos enviados");
@@ -140,18 +142,41 @@ app.post("/Post",(req,res)=>{
         
     })
         console.log(datos.length)
-        historico=[];
+        var historico=[];
+        var taxi1=[];
+        var taxi2=[];
         var dates=[]
+        var datesTaxi1=[];
+        var datesTaxi2=[];
         for ( var j=0;j<datos.length;j++ ){
+            
             historico.push([datos[j].latitud,datos[j].longitud]);
         };
         for ( var j=0;j<datos.length;j++ ){
             dates.push([datos[j].fecha,datos[j].hora]);
         };
+
+        for ( var j=0;j<datos.length;j++ ){
+            if (datos[j].taxi=='1'){
+                taxi1.push([datos[j].latitud,datos[j].longitud]);
+                datesTaxi1.push([datos[j].fecha,datos[j].hora]);
+            }
+            if (datos[j].taxi=='2'){
+                taxi2.push([datos[j].latitud,datos[j].longitud]);
+                datesTaxi2.push([datos[j].fecha,datos[j].hora]);
+            }
+           
+        };
+
+        
         
         res.json({
             historico : historico,
             dates: dates,
+            taxi1:taxi1,
+            datesTaxi1:datesTaxi1,
+            taxi2:taxi2,
+            datesTaxi2:datesTaxi2,
         });
         
         
