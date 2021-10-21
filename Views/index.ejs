@@ -168,8 +168,8 @@
         dates = historico.dates;
         var datesTaxi1=historico.datesTaxi1;
         var datesTaxi2=historico.datesTaxi2;
-        var taxi1=historico.taxi1;
-        var taxi2=historico.taxi2;
+          taxi1=historico.taxi1;
+          taxi2=historico.taxi2;
 
         //polyline.setLatLngs(latlngs, { color: "#4353ff" });
         polyline.setLatLngs(taxi1, { color: "#4353ff" });
@@ -191,7 +191,7 @@
       polyline.on("click", (e) => {
         console.log(e);
 
-        var counts = [];
+        let counts = [];
         for (var j = 0; j < taxi1.length; j++) {
           counts.push(taxi1[j][0]);
         }
@@ -218,13 +218,13 @@
       polyline2.on("click", (e) => {
         console.log(e);
 
-        var counts = [];
+        let counts = [];
         for (var j = 0; j < taxi2.length; j++) {
           counts.push(taxi2[j][0]);
         }
 
         goal = parseFloat(e.latlng.lat);
-        var closest = counts.reduce(function (prev, curr) {
+          var closest = counts.reduce(function (prev, curr) {
           return Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev;
         });
         console.log(counts.indexOf(closest));
