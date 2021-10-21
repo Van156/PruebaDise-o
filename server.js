@@ -105,6 +105,7 @@ app.get("/prueba", (req,res) => {
        "fecha":fecha,
        "hora":hora,
        "contador": contador,
+       "taxi":taxi,
    });
 
 })
@@ -148,15 +149,18 @@ app.post("/Post",(req,res)=>{
         var dates=[]
         var datesTaxi1=[];
         var datesTaxi2=[];
+
         for ( var j=0;j<datos.length;j++ ){
             
             historico.push([datos[j].latitud,datos[j].longitud]);
         };
+
         for ( var j=0;j<datos.length;j++ ){
             dates.push([datos[j].fecha,datos[j].hora]);
         };
 
         for ( var j=0;j<datos.length;j++ ){
+
             if (datos[j].taxi=='1'){
                 taxi1.push([datos[j].latitud,datos[j].longitud]);
                 datesTaxi1.push([datos[j].fecha,datos[j].hora]);

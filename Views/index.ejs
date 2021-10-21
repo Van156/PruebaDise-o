@@ -271,6 +271,7 @@
           }
           polyline.setLatLngs(taxi1, { color: "#4353ff" }); //Añaduir esta coordenada a la polilinea
           polyline2.setLatLngs(taxi2, { color: "#43ff56" });
+       
         }
 
         
@@ -278,7 +279,7 @@
 
       document.addEventListener("load", getGPS());
 
-      let interval = setInterval(getGPS, 5000);
+      let interval = setInterval(getGPS, 1000);
 
       $("#dates").daterangepicker({
         timePicker: true,
