@@ -109,7 +109,7 @@ app.get("/prueba", (req,res) => {
         var nivel2='';
         for ( var j=0;j<datos.length;j++ ){
             if (datos[j].taxi=='1'){
-                nivel=datos[j].nivel
+                nivel1=datos[j].nivel
                 break;
             }
         };
