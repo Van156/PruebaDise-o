@@ -120,6 +120,8 @@
       var taxi2=[];
       var datesTaxi1=[];
       var datesTaxi2=[];
+      var nivelTaxi1=[];
+      var nivelTaxi2=[];
 
 	//Sliders Selection
      let slider1 = document.querySelector("#myRange");
@@ -199,6 +201,8 @@
         datesTaxi2=historico.datesTaxi2;
           taxi1=historico.taxi1;
           taxi2=historico.taxi2;
+         nivelTaxi1=historico.nivelTaxi1;
+         nivelTaxi2=historico.nivelTaxi2; 
 
         //polyline.setLatLngs(latlngs, { color: "#4353ff" });
         polyline.setLatLngs(taxi1, { color: "#4353ff" });
@@ -251,6 +255,7 @@
               datesTaxi1[index][0] +
               " hora : " +
               datesTaxi1[index][1]
+              +"Nivel de Gasolina:"+nivelTaxi1[index]
           )
           .openOn(myMap);
       });
@@ -278,6 +283,7 @@
               datesTaxi2[index][0] +
               " hora : " +
               datesTaxi2[index][1]
+              +"Nivel de Gasolina:"+nivelTaxi2[index]
           )
           .openOn(myMap);
       });
@@ -293,7 +299,11 @@
                                   Longitud: ${responseJson.longitud},
                                   Fecha: ${responseJson.fecha},
                                   Hora: ${responseJson.hora},
-                                  Numero: ${responseJson.contador}`;
+                                  Taxi actual: ${responseJson.taxi},
+                                  Nivel Taxi1:${responseJson.nivelTaxi1},
+                                  Nivel Taxi2:${responseJson.nivelTaxi2},
+                                  contador: ${responseJson.contador}`
+                                  ;
 
         latitud = parseFloat(responseJson.latitud);
         longitud = parseFloat(responseJson.longitud);

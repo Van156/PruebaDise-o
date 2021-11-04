@@ -8,6 +8,7 @@ var longitud = '';
 var fecha='';
 var hora='';
 var taxi='';
+var nivel='';
 
 //Usar variables de entorno de archivo .env para info privada
 
@@ -64,10 +65,11 @@ udpServer.on('message',(msg,rinfo)=>{
     fecha=vector[5];
     hora=vector[7];
     taxi=vector[9];
+    nivel=vector[11];
 
     contador = contador +1
 
-    var datos  = "INSERT INTO taxi_location (latitud,longitud,fecha,hora,taxi) "+"VALUES('"+latitud+"','"+longitud+"','"+fecha+"','"+hora+"','"+taxi+"')";
+    var datos  = "INSERT INTO taxi_location (latitud,longitud,fecha,hora,taxi,nivel) "+"VALUES('"+latitud+"','"+longitud+"','"+fecha+"','"+hora+"','"+taxi+"','"+nivel+"')";
     conexion.query(datos,(error, rows) => {
         if(error)  throw error
         console.log("Datos enviados");
@@ -97,15 +99,27 @@ app.get('/',(req,res)=>{
 
 /*Aqui se Envia la latitud y longitud cuando el usuario llegue a "webserver/prueba" */
 app.get("/prueba", (req,res) => {
-    
+    var nivel1='';
+    var nivel2='';
+    conexion.query("SELECT nivel FROM taxi_location WHERE taxi=1 Order By id  desc limit 1",(error,rows)=> {
+        if (error) throw error 
+        nivel1= rows;
+    });
+    conexion.query("SELECT nivel FROM taxi_location WHERE taxi=2 Order By id  desc limit 1",(error,rows)=> {
+        if (error) throw error 
+        nivel2= rows;
+    });
 
    res.json({
+
        "latitud": latitud, //Enviando datos que recojimos en el servidor UDP
        "longitud": longitud,
        "fecha":fecha,
        "hora":hora,
        "contador": contador,
-       "taxi":taxi,
+       "taxi actual":taxi,
+       "nivelTaxi1":nivel1,
+       "nivelTaxi2":nivel2,
    });
 
 })
@@ -149,6 +163,8 @@ app.post("/Post",(req,res)=>{
         var dates=[]
         var datesTaxi1=[];
         var datesTaxi2=[];
+        var nivelTaxi1=[];
+        var nivelTaxi2=[];
 
         for ( var j=0;j<datos.length;j++ ){
             
@@ -164,10 +180,12 @@ app.post("/Post",(req,res)=>{
             if (datos[j].taxi=='1'){
                 taxi1.push([datos[j].latitud,datos[j].longitud]);
                 datesTaxi1.push([datos[j].fecha,datos[j].hora]);
+                nivelTaxi1.push(datos[j].nivel);
             }
             if (datos[j].taxi=='2'){
                 taxi2.push([datos[j].latitud,datos[j].longitud]);
                 datesTaxi2.push([datos[j].fecha,datos[j].hora]);
+                nivelTaxi2.push(datos[j].nivel);
             }
            
         };
@@ -181,6 +199,8 @@ app.post("/Post",(req,res)=>{
             datesTaxi1:datesTaxi1,
             taxi2:taxi2,
             datesTaxi2:datesTaxi2,
+            nivelTaxi1:nivelTaxi1,
+            nivelTaxi2:nivelTaxi2,
         });
         
         
@@ -189,6 +209,7 @@ app.post("/Post",(req,res)=>{
     
 
 })
+
 
 app.listen(port,()=>{
     console.log('Servidor Web en el puerto ', port)
