@@ -54,9 +54,4 @@ conexion.query("SELECT *from UbicacionTaxi2",(error,rows)=> {
    var horas=horaInicial+'-'+horaFinal;
    console.log(horas);
 })
- var nivel='';
-if (nivel===''){
-    nivel=""+parseInt(Math.random()*20)+"";
-    console.log("Nivel")
-    console.log(nivel);
-}
+

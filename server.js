@@ -56,7 +56,7 @@ udpServer.on('message',(msg,rinfo)=>{
 
     console.log('----------------------------------------------');
 
-    message = `${msg}`;
+    message = `${msg}`+" nivel: 100";
 
     vector = message.split(' ');
 
@@ -66,9 +66,7 @@ udpServer.on('message',(msg,rinfo)=>{
     hora=vector[7];
     taxi=vector[9];
     nivel=vector[11];
-    if (nivel=='undefined' || nivel==''){
-        nivel='100';
-    }
+    
     
 
     contador = contador +1
