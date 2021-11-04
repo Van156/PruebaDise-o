@@ -71,9 +71,15 @@
         <div id="gps" class="gps"></div>
 
         <!-- ADD slider for the map -->
-        <div class="slidecontainer">
-          <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+        <div class="slidecontainer" style="color:#7D54C0">
+	  <h3>Slider para Recorrido de Taxi #1</h3>
+          <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
         </div>
+
+	<div class="slidecontainer2" style="color:#F2C94C">
+	  <h3>Slider para Recorrido de Taxi #2</h3>
+	  <input type="range" min="0" max="100" value="50" class="slider" id="myRange2">
+	</div>
 
         <div
           id="myMap"
@@ -115,7 +121,15 @@
       var datesTaxi1=[];
       var datesTaxi2=[];
 
+	//Sliders Selection
+     let slider1 = document.querySelector("#myRange");
+     let slider2 = document.querySelector("#myRange2");
+
       let myMap = L.map("myMap"); // latitude, longitude y zoom
+	
+	//Slider Markers
+	let slider1Marker = L.marker([latitud, longitud]).addTo(myMap);
+	let slider2Marker = L.marker([latitud, longitud]).addTo(myMap);
 
       let markerInicial = L.marker([latitud, longitud]).addTo(myMap);
       let markerInicial2 = L.marker([latitud, longitud]).addTo(myMap);
@@ -126,11 +140,11 @@
 
       myMap.setView([latitud, longitud], 14);
 
-      var polyline = L.polyline(latlngs, { color: "#4353ff", weight: 6 }).addTo(
+      var polyline = L.polyline(latlngs, { color: "#7D54C0", weight: 6 }).addTo(
         myMap
       );
 
-      var polyline2 = L.polyline(latlngs, { color: "#43ff56", weight: 6 }).addTo(
+      var polyline2 = L.polyline(latlngs, { color: "#F2C94C", weight: 6 }).addTo(
         myMap
       );
 
@@ -198,6 +212,17 @@
           historico.taxi2[historico.taxi2.length - 1]
         );
 
+	slider1.max = taxi1.length - 1;
+	slider2.max = taxi2.length - 1;
+
+	slider1.addEventListener('input', (e) => { 
+		
+		markerInicial.setLatLng(historico.taxi1[slider1.value]); 
+	});
+
+	slider2.addEventListener('input', (e) => {
+		markerInicial2.setLatLng(historico.taxi2[slider2.value]);
+	}); 
 
         myMap.panTo( historico.historico[historico.historico.length - 1]);
       });
