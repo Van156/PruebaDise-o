@@ -101,28 +101,42 @@ app.get('/',(req,res)=>{
 
 /*Aqui se Envia la latitud y longitud cuando el usuario llegue a "webserver/prueba" */
 app.get("/prueba", (req,res) => {
-    var nivel1='';
-    var nivel2='';
-    conexion.query("SELECT nivel FROM taxi_location WHERE taxi=1 Order By id  desc limit 1",(error,rows)=> {
+    
+    conexion.query("SELECT * FROM taxi_location  Order By id  desc ",(error,rows)=> {
         if (error) throw error 
-        nivel1= rows;
-    });
-    conexion.query("SELECT nivel FROM taxi_location WHERE taxi=2 Order By id  desc limit 1",(error,rows)=> {
-        if (error) throw error 
-        nivel2= rows;
-    });
+        var datos= rows;
+        var nivel1='';
+        var nivel2='';
+        for ( var j=0;j<datos.length;j++ ){
+            if (datos[j].taxi=='1'){
+                nivel=datos[j].nivel
+                break;
+            }
+        };
+        for ( var j=0;j<datos.length;j++ ){
+            if (datos[j].taxi=='2'){
+                nivel2=datos[j].nivel
+                break;
+            }
+        };
 
-   res.json({
+        
+        res.json({
 
-       "latitud": latitud, //Enviando datos que recojimos en el servidor UDP
-       "longitud": longitud,
-       "fecha":fecha,
-       "hora":hora,
-       "contador": contador,
-       "taxiActual":taxi,
-       "nivelTaxi1":nivel1,
-       "nivelTaxi2":nivel2,
-   });
+            "latitud": latitud, //Enviando datos que recojimos en el servidor UDP
+            "longitud": longitud,
+            "fecha":fecha,
+            "hora":hora,
+            "contador": contador,
+            "taxiActual":taxi,
+            "nivelTaxi1":nivel1,
+            "nivelTaxi2":nivel2,
+            
+        });
+    });
+    
+
+   
 
 })
 
