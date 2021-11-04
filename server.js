@@ -66,6 +66,10 @@ udpServer.on('message',(msg,rinfo)=>{
     hora=vector[7];
     taxi=vector[9];
     nivel=vector[11];
+    if (nivel=='undefined' || nivel==''){
+        nivel='100';
+    }
+    
 
     contador = contador +1
 
@@ -117,7 +121,7 @@ app.get("/prueba", (req,res) => {
        "fecha":fecha,
        "hora":hora,
        "contador": contador,
-       "taxi actual":taxi,
+       "taxiActual":taxi,
        "nivelTaxi1":nivel1,
        "nivelTaxi2":nivel2,
    });
