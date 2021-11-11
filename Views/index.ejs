@@ -71,12 +71,12 @@
         <div id="gps" class="gps"></div>
 
         <!-- ADD slider for the map -->
-        <div class="slidecontainer" style="color:#7D54C0">
+        <div class="slidecontainer sl" style="color:#7D54C0;display:none;">
 	  <h3>Slider para Recorrido de Taxi #1</h3>
           <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
         </div>
 
-	<div class="slidecontainer2" style="color:#F2C94C">
+	<div class="slidecontainer2 sl" style="color:#F2C94C;display:none;">
 	  <h3>Slider para Recorrido de Taxi #2</h3>
 	  <input type="range" min="0" max="100" value="50" class="slider" id="myRange2">
 	</div>
@@ -302,8 +302,7 @@
                                   Taxi actual: ${responseJson.taxiActual},
                                   Nivel Taxi1:${responseJson.nivelTaxi1},
                                   Nivel Taxi2:${responseJson.nivelTaxi2},
-                                  contador: ${responseJson.contador}`
-                                  ;
+                                  contador: ${responseJson.contador}`;
 
         latitud = parseFloat(responseJson.latitud);
         longitud = parseFloat(responseJson.longitud);
@@ -344,6 +343,8 @@
         if (document.querySelector("#tipoSelect").value === "historico") {
           document.querySelector("#form").style.display = "block";
           document.querySelector("#gps").style.display = "none";
+	  document.querySelector(".slidecontainer").style.display = "block";
+	  document.querySelector(".slidecontainer2").style.display = "block";
           clearInterval(interval);
         } else {
           latlngs = [];
@@ -352,6 +353,8 @@
           setInterval(getGPS, 1000);
           document.querySelector("#form").style.display = "none";
           document.querySelector("#gps").style.display = "block";
+	  document.querySelector(".slidecontainer1").style.display = "none";
+	  document.querySelector(".slidecontainer2").style.display = "block";	
         }
       });
     </script>
