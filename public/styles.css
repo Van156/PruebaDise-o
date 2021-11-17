@@ -6,6 +6,9 @@ body {
   font-family: "Mulish", sans-serif;
   font-size: 1rem;
   line-height: 1.2em;
+  
+  overflow-x:scroll;
+  overflow-y:hidden;
 }
 .row {
   display: flex;
@@ -101,3 +104,4 @@ h2 {
 #gps{
   margin: 5px auto;
 }
+
