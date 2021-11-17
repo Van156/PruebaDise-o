@@ -101,13 +101,13 @@ h2 {
 
  @media(min-width: 768px){
      .mapa{
-       height: 60vh;
+       height: 600px;
      }
   }
 
 @media(min-width: 1140px){
     .mapa{
-      height: 60vh;
+      height: 600px;
     }
  }
 
