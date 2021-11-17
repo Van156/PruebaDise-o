@@ -310,8 +310,10 @@
         longitud = parseFloat(responseJson.longitud);
         console.log("latitud: ",latitud);
         console.log(typeof(latitud));
-        
+
         var taxi=responseJson.taxi;
+        console.log("Tipo de taxi",taxi)
+        console.log("Tipo de dato",typeof(taxi));
         myMap.panTo([latitud, longitud]);
 
         if (latitud != 0) {
