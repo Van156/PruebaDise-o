@@ -60,7 +60,9 @@ h2 {
   margin-bottom:  20px;
 }
 .input-field {
-  width:  20%;
+
+  /* width:  20%; */
+
   margin-bottom:  5px;
 }
 .dates-div {
