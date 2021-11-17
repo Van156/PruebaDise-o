@@ -122,7 +122,6 @@ app.get("/prueba", (req,res) => {
 
         
         res.json({
-
             "latitud": latitud, //Enviando datos que recojimos en el servidor UDP
             "longitud": longitud,
             "fecha":fecha,
@@ -131,7 +130,6 @@ app.get("/prueba", (req,res) => {
             "taxiActual":taxi,
             "nivelTaxi1":nivel1,
             "nivelTaxi2":nivel2,
-            
         });
     });
     

@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="/public/styles.css" />
   </head>
   <body>
+
     <header class="header">
       <div class="container log">
         <div class="logo1">
@@ -38,29 +39,30 @@
       </div>
     </header>
 
+
     <div>
       <div class="container">
         <div class="row">
 
-    <section class="type-election half">
-      <div class="container u-txt-center">
-        <label for="tipoSelect" class="input-label"
-          >¿Qué desea ver en el mapa?</label
-        >
-        <select class="input-field" id="tipoSelect" name="tipo">
-          <option value="actual">Actual</option>
-          <option value="historico">Histórico</option>
-        </select>
-      </div>
-    </section>
+      <section class="type-election half">
+        <div class="container u-txt-center">
+          <label for="tipoSelect" class="input-label"
+            >¿Qué desea ver en el mapa?</label
+          >
+          <select class="input-field" id="tipoSelect" name="tipo">
+            <option value="actual">Actual</option>
+            <option value="historico">Histórico</option>
+          </select>
+        </div>
+      </section>
 
-    <form id="form" class="type-election dates-div half">
-      <div class="container u-txt-center">
-        <label for="dates" class="input-label">Escoga el rango de fechas</label>
-        <input class="input-field" type="text" name="dates" id="dates" />
-        <button class="send-button">Enviar fechas</button>
-      </div>
-    </form>
+      <form id="form" class="type-election dates-div half">
+        <div class="container u-txt-center">
+          <label for="dates" class="input-label">Escoga el rango de fechas</label>
+          <input class="input-field" type="text" name="dates" id="dates" />
+          <button class="send-button">Enviar fechas</button>
+        </div>
+      </form>
 
         </div>
       </div>
@@ -72,7 +74,7 @@
 
         <!-- ADD slider for the map -->
         <div class="slidecontainer sl" style="color:#7D54C0;display:none;">
-	  <h3>Slider para Recorrido de Taxi #1</h3>
+	    <h3>Slider para Recorrido de Taxi #1</h3>
           <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
         </div>
 
@@ -306,15 +308,21 @@
 
         latitud = parseFloat(responseJson.latitud);
         longitud = parseFloat(responseJson.longitud);
+        console.log("latitud: ",latitud);
+        console.log(typeof(latitud));
         var taxi=responseJson.taxi;
         myMap.panTo([latitud, longitud]);
 
         if (latitud != 0) {
           if (taxi==='1'){
             taxi1.push([latitud,longitud]);
+            console.log('Taxi1');
+            console.log(taxi1);
             markerInicial.setLatLng([latitud, longitud]);
           }
           if(taxi==='2'){
+            console.log('Taxi2');
+            console.log(taxi2);
             taxi2.push([latitud,longitud]);
             markerInicial2.setLatLng([latitud, longitud]);
           }
