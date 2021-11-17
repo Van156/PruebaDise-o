@@ -75,14 +75,14 @@
         </div>
 
         <!-- ADD slider for the map -->
-        <div class="slidecontainer sl" style="color:#7D54C0;display:none;">
+        <div id="slide1" class="slidecontainer sl" style="color:#7D54C0;display:none;">
 
 	        <h3>Slider para Recorrido de Taxi #1</h3>
           <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
 
         </div>
 
-        <div class="slidecontainer2 sl" style="color:#F2C94C;display:none;">
+        <div id="slide2" class="slidecontainer2 sl" style="color:#F2C94C;display:none;">
             <h3>Slider para Recorrido de Taxi #2</h3>
             <input type="range" min="0" max="100" value="50" class="slider" id="myRange2">
         </div>
@@ -371,8 +371,8 @@
 
 	        document.querySelector(".slidecontainer1").style.display = "none";
 	        // document.querySelector(".slidecontainer2").style.display = "block";	
-          document.querySelector(".slidecontainer").style.display = none;
-          document.querySelector(".slidecontainer2").style.display = none;
+          document.querySelector("#slide1").style.display = none;
+          document.querySelector("#slide2").style.display = none;
 
         }
       });
