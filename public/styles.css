@@ -101,13 +101,13 @@ h2 {
 
  @media(win-width: 768px){
      .mapa{
-       height: 70vh;
+       height: 60vh;
      }
   }
 
 @media(win-width: 1140px){
     .mapa{
-      height: 70vh;
+      height: 60vh;
     }
  }
 
