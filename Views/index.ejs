@@ -74,17 +74,26 @@
 
         </div>
 
-        <!-- ADD slider for the map -->
-        <div id="slide1" class="slidecontainer sl" style="color:#7D54C0;display:none;">
+        <!-- ADD sliders for the map -->
+        <div class="row slide-wrapper">
+          <div id="slide1" class="slidecontainer sl" style="color:#7D54C0;">
 
-	        <h3>Slider para Recorrido de Taxi #1</h3>
-          <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
+            <h3>Slider para Recorrido de Taxi #1</h3>
+            <div class="slider-container">
+              <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
 
-        </div>
+              <div class="time-slider" id="timeSlider1"></div>
+            </div>
+          </div>
 
-        <div id="slide2" class="slidecontainer2 sl" style="color:#F2C94C;display:none;">
-            <h3>Slider para Recorrido de Taxi #2</h3>
-            <input type="range" min="0" max="100" value="50" class="slider" id="myRange2">
+          <div id="slide2" class="slidecontainer2 sl" style="color:#F2C94C;">
+              <h3>Slider para Recorrido de Taxi #2</h3>
+              <div class="slider-container">
+                <input type="range" min="0" max="100" value="50" class="slider" id="myRange2">
+
+                <div class="time-slider" id="timeSlider2"></div>
+              </div>
+          </div>
         </div>
 
         <div
@@ -225,13 +234,25 @@
 	slider1.max = taxi1.length - 1;
 	slider2.max = taxi2.length - 1;
 
+  let locationPol1 = document.querySelector("#timeSlider1");
 	slider1.addEventListener('input', (e) => { 
-		
-		markerInicial.setLatLng(historico.taxi1[slider1.value]); 
+		markerInicial.setLatLng(taxi1[slider1.value]);
+
+    locationPol1.innerHTML = `Latitud: <strong>${taxi1[slider1.value][0]}</strong>, 
+                              Longitud: <strong>${taxi1[slider1.value][1]}</strong>,
+                              Fecha y Hora: <strong>${datesTaxi1[slider1.value]}</strong>`;
+
 	});
 
+  let locationPol2 = document.querySelector("#timeSlider2");
+  let latSlider2;
+  let longSlider2;
 	slider2.addEventListener('input', (e) => {
 		markerInicial2.setLatLng(historico.taxi2[slider2.value]);
+
+    locationPol2.innerHTML = `Latitud: <strong>${taxi2[slider2.value][0]}</strong>, 
+                              Longitud: <strong>${taxi2[slider2.value][1]}</strong>,
+                              Fecha y Hora: <strong>${datesTaxi2[slider2.value]}</strong>`;
 	}); 
 
         myMap.panTo( historico.historico[historico.historico.length - 1]);
@@ -358,8 +379,7 @@
         if (document.querySelector("#tipoSelect").value === "historico") {
           document.querySelector("#form").style.display = "block";
           document.querySelector("#gps").style.display = "none";
-	        document.querySelector(".slidecontainer").style.display = "block";
-	        document.querySelector(".slidecontainer2").style.display = "block";
+	        document.querySelector(".slide-wrapper").style.display = "flex";
           clearInterval(interval);
         } else {
           latlngs = [];
@@ -369,10 +389,10 @@
           document.querySelector("#form").style.display = "none";
           document.querySelector("#gps").style.display = "block";
 
-	        document.querySelector(".slidecontainer1").style.display = "none";
+	        document.querySelector(".slide-wrapper").style.display = "none";
 	        // document.querySelector(".slidecontainer2").style.display = "block";	
-          document.querySelector(".slidecontainer").style.display = "none";
-	        document.querySelector(".slidecontainer2").style.display = "none";
+          // document.querySelector("#slide1").style.display = "none";
+	        // document.querySelector("#slide2").style.display = "none";
 
         }
       });
