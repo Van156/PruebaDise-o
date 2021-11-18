@@ -96,10 +96,18 @@
           </div>
         </div>
 
+        <!-- Mapa para Actual -->
         <div
           id="myMap"
           class="mapa"
         ></div>
+
+        <!-- Mapa para Histórico -->
+        <div
+          id="myMapHist"
+          class="mapa"
+        ></div>
+
       </div>
     </section>
 
@@ -143,6 +151,9 @@
      let slider2 = document.querySelector("#myRange2");
 
       let myMap = L.map("myMap"); // latitude, longitude y zoom
+
+      // Mapa Hisotirco myMapHist
+      let myMapHist = L.map("myMapHist");
 	
 	//Slider Markers
 	let slider1Marker = L.marker([latitud, longitud]).addTo(myMap);
@@ -151,11 +162,23 @@
       let markerInicial = L.marker([latitud, longitud]).addTo(myMap);
       let markerInicial2 = L.marker([latitud, longitud]).addTo(myMap);
 
+      // Markers HIstorico
+      let markerInicialHist = L.marker([latitud, longitud]).addTo(myMapHist);
+      let markerInicialHist2 = L.marker([latitud, longitud]).addTo(myMapHist);
+
       L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`, {
         maxZoom: 18,
       }).addTo(myMap);
 
+      // Mapa Historico
+      L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`, {
+        maxZoom: 18,
+      }).addTo(myMapHist);
+
       myMap.setView([latitud, longitud], 14);
+
+      // Mapa Historico
+      myMapHist.setView([latitud, longitud], 14);
 
       var polyline = L.polyline(latlngs, { color: "#7D54C0", weight: 6 }).addTo(
         myMap
@@ -164,6 +187,12 @@
       var polyline2 = L.polyline(latlngs, { color: "#F2C94C", weight: 6 }).addTo(
         myMap
       );
+
+      // Polilineas de Mapa Historico
+      var polylineHist = L.polyline(latlngs, { color: "#7D54C0", weight: 6 }).addTo(myMapHist);
+
+      var polylineHist2 = L.polyline(latlngs, { color: "#F2C94C", weight: 6 }).addTo( myMapHist);
+
 
       var popup = L.popup();
       var popup2 = L.popup();
@@ -220,14 +249,14 @@
          nivelTaxi2=historico.nivelTaxi2; 
 
         //polyline.setLatLngs(latlngs, { color: "#4353ff" });
-        polyline.setLatLngs(taxi1, { color: "#4353ff" });
-        polyline2.setLatLngs(taxi2, { color: "#43ff56" });
+        polylineHist.setLatLngs(taxi1, { color: "#4353ff" });
+        polylineHist2.setLatLngs(taxi2, { color: "#43ff56" });
 
-        markerInicial.setLatLng(
+        markerInicialHist.setLatLng(
           historico.taxi1[historico.taxi1.length - 1]
         );
 
-        markerInicial2.setLatLng(
+        markerInicialHist2.setLatLng(
           historico.taxi2[historico.taxi2.length - 1]
         );
 
@@ -236,7 +265,7 @@
 
   let locationPol1 = document.querySelector("#timeSlider1");
 	slider1.addEventListener('input', (e) => { 
-		markerInicial.setLatLng(taxi1[slider1.value]);
+		markerInicialHist.setLatLng(taxi1[slider1.value]);
 
     locationPol1.innerHTML = `Latitud: <strong>${taxi1[slider1.value][0]}</strong>, 
                               Longitud: <strong>${taxi1[slider1.value][1]}</strong>,
@@ -248,17 +277,18 @@
   let latSlider2;
   let longSlider2;
 	slider2.addEventListener('input', (e) => {
-		markerInicial2.setLatLng(historico.taxi2[slider2.value]);
+		markerInicialHist2.setLatLng(taxi2[slider2.value]);
 
     locationPol2.innerHTML = `Latitud: <strong>${taxi2[slider2.value][0]}</strong>, 
                               Longitud: <strong>${taxi2[slider2.value][1]}</strong>,
                               Fecha y Hora: <strong>${datesTaxi2[slider2.value]}</strong>`;
 	}); 
 
-        myMap.panTo( historico.historico[historico.historico.length - 1]);
+        myMapHist.panTo( historico.historico[historico.historico.length - 1]);
       });
 
 
+      // Mostar Datos de Fecha y Ubicacion cuando se clickea la polilinea
       polyline.on("click", (e) => {
         console.log(e);
 
@@ -314,7 +344,9 @@
           )
           .openOn(myMap);
       });
+      //
 
+      // Conseguir Datos en Actual
       async function getGPS() {
         const response = await fetch("./prueba", {
          
@@ -362,9 +394,7 @@
         
       }
 
-      document.addEventListener("load", getGPS());
-
-      let interval = setInterval(getGPS, 1000);
+      // document.addEventListener("load", getGPS());
 
       $("#dates").daterangepicker({
         timePicker: true,
@@ -375,25 +405,38 @@
         },
       });
 
+      
+      let interval = setInterval(()=>{getGPS()}, 1000); // Ejecutar funcion por defecto (Actual)
+      document.querySelector("#tipoSelect").addEventListener("change", (e) => {
+        if (document.querySelector("#tipoSelect").value === "historico") {
+          // Dejar de Ejecutar funcion cuando se está en historico
+          clearInterval(interval);
+        } else  {
+          // Ejecutar funcion cuando se está en Actual
+          interval = setInterval(()=>{getGPS()}, 1000);
+        }
+      });
+
       document.querySelector("#tipoSelect").addEventListener("change", (e) => {
         if (document.querySelector("#tipoSelect").value === "historico") {
           document.querySelector("#form").style.display = "block";
           document.querySelector("#gps").style.display = "none";
 	        document.querySelector(".slide-wrapper").style.display = "flex";
-          clearInterval(interval);
+          document.querySelector("#myMapHist").style.display = "block";
+          document.querySelector("#myMap").style.display = "none";
+          
         } else {
+          document.querySelector("#myMapHist").style.display = "none";
+          document.querySelector("#myMap").style.display = "block";
+          
           latlngs = [];
           taxi1=[];
           taxi2=[];
-          setInterval(getGPS, 1000);
+          
           document.querySelector("#form").style.display = "none";
           document.querySelector("#gps").style.display = "block";
 
 	        document.querySelector(".slide-wrapper").style.display = "none";
-	        // document.querySelector(".slidecontainer2").style.display = "block";	
-          // document.querySelector("#slide1").style.display = "none";
-	        // document.querySelector("#slide2").style.display = "none";
-
         }
       });
     </script>

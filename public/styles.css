@@ -135,9 +135,14 @@ h2 {
   flex-wrap: wrap;
 }
 .time-slider {
-  /* margin-left: 14px; */
   margin-bottom: 5px;
 }
 .slide-wrapper {
   display: none;
+}
+#myMapHist {
+  display: none;
+}
+.sl {
+  width: 50%;
 }
